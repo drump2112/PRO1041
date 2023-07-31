@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/view/FormQuanLy.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>57</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/view/ViewNhanVien.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>49</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceTaiKhoan.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormDatSan.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormService.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/swing/swing/TableHeader.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPLichDatSan.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/domainModel/GioHang.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/domainModel/LichDatSanBong.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPGioHang.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceGioHang.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormThanhToan.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormAdmin.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceLichDatSan.java</file>
+        </group>
+    </open-files>
+</project-private>
