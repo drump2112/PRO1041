@@ -33,7 +33,7 @@ public class FormNhanVien extends javax.swing.JFrame {
         initComponents();
 
         lbAccount.removeAll();
-        lbAccount.setText(qltk.getName(Global.getUser()));
+        lbAccount.setText(qltk.getNameStaff(Global.getUser()));
 
         setBackground(new Color(0, 0, 0, 0));
         formDs = new FormDatSan();

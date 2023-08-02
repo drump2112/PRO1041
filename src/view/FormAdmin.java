@@ -40,7 +40,7 @@ public class FormAdmin extends javax.swing.JFrame {
         setBackground(new Color(0, 0, 0, 0));
 
         lbAccount.removeAll();
-        lbAccount.setText(qltk.getName(Global.getUser()));
+        lbAccount.setText(qltk.getNameStaff(Global.getUser()));
 
         formDs = new FormDatSan();
         formTK = new FormThongKe();

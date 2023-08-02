@@ -25,7 +25,7 @@ public class ServiceTaiKhoan {
         return RP.dangNhap(user, pass);
     }
 
-    public String getName(String user) {
+    public String getNameStaff(String user) {
         return RP.getNameStaff(user);
     }
 

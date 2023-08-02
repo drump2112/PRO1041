@@ -11,6 +11,8 @@ import global.Uhelper;
 import swing.swing.ScrollBar;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -136,6 +138,81 @@ public class FormDatSan extends javax.swing.JPanel {
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Muốn Đặt Sấn");
             return false;
+        }
+        return true;
+    }
+
+    boolean checkCaDa() {
+        LocalTime date = LocalTime.now();
+        DateTimeFormatter DTF = DateTimeFormatter.ofPattern("H:mm");
+        String h = DTF.format(date);
+
+        LocalTime startTime = LocalTime.parse("06:16");
+        LocalTime endTime = LocalTime.of(8, 0);
+
+        LocalTime startTime2 = LocalTime.parse("08:16");
+        LocalTime endTime2 = LocalTime.of(10, 0);
+
+        LocalTime startTime3 = LocalTime.parse("10:16");
+        LocalTime endTime3 = LocalTime.of(12, 0);
+
+        LocalTime startTime4 = LocalTime.parse("14:16");
+        LocalTime endTime4 = LocalTime.of(16, 0);
+
+        LocalTime startTime5 = LocalTime.parse("16:16");
+        LocalTime endTime5 = LocalTime.of(18, 0);
+
+        LocalTime startTime6 = LocalTime.parse("18:16");
+        LocalTime endTime6 = LocalTime.of(20, 0);
+
+        LocalTime startTime7 = LocalTime.parse("20:16");
+        LocalTime endTime7 = LocalTime.of(22, 0);
+
+        if (cboCaDa.getSelectedItem().equals("ca 1")) {
+            if (date.isAfter(startTime)) {
+                return false;
+            }
+        }
+
+        if (cboCaDa.getSelectedItem().equals("ca 2")) {
+            if (date.isAfter(startTime2)) {
+                JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 2");
+                return false;
+            }
+        }
+
+        if (cboCaDa.getSelectedItem().equals("ca 3")) {
+            if (date.isAfter(startTime3)) {
+                JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 3");
+                return false;
+            }
+        }
+
+        if (cboCaDa.getSelectedItem().equals("ca 4")) {
+            if (date.isAfter(startTime4)) {
+                JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 4");
+                return false;
+            }
+        }
+        if (cboCaDa.getSelectedItem().equals("ca 5")) {
+            if (date.isAfter(startTime5)) {
+                JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 5");
+                return false;
+            }
+        }
+
+        if (cboCaDa.getSelectedItem().equals("ca 6")) {
+            if (date.isAfter(startTime6)) {
+                JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 6");
+                return false;
+            }
+        }
+
+        if (cboCaDa.getSelectedItem().equals("ca 7")) {
+            if (date.isAfter(startTime7)) {
+                JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 7");
+                return false;
+            }
         }
         return true;
     }
@@ -662,7 +739,7 @@ public class FormDatSan extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnDatSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatSanActionPerformed
-        if (check()) {
+        if (check() && checkCaDa()) {
             JOptionPane.showMessageDialog(this, qlds.addLichDatSan(readForm(), readFormKh()));
             fillTable(qlds.getList());
         }
@@ -795,7 +872,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void lbSan11CMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan11CMouseClicked
         // TODO add your handling code here:
-      
+
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
