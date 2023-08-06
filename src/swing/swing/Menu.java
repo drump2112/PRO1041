@@ -42,6 +42,7 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
+        
         listMenu1.addItem(new Model_Menu("calender", "Đặt Sân", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("12", "Dịch Vụ", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("bill", "Thanh Toán", Model_Menu.MenuType.MENU));
@@ -60,6 +61,7 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("ac", "Quản Lý Tài Khoản", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("logout", "Log out", Model_Menu.MenuType.MENU));
+        
     }
 
     /**
@@ -117,6 +119,7 @@ public class Menu extends javax.swing.JPanel {
 
     @Override
     protected void paintChildren(Graphics grphcs) {
+        
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         GradientPaint g = new GradientPaint(0, 0, Color.decode("#4286f4"), 0, getHeight(), Color.decode("#373B44"));
@@ -124,6 +127,7 @@ public class Menu extends javax.swing.JPanel {
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
         g2.fillRect(getWidth() - 20, 0, getWidth(), getHeight());
         super.paintChildren(grphcs);
+        
     }
 
     private int x;

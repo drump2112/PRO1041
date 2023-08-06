@@ -11,9 +11,10 @@ import global.Uhelper;
 import swing.swing.ScrollBar;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -45,9 +46,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-    /**
-     * Creates new form FormDatSan
-     */
     public FormDatSan() {
         initComponents();
         txtDate.setBackground(new Color(0, 0, 0, 0));
@@ -112,7 +110,7 @@ public class FormDatSan extends javax.swing.JPanel {
                 idsb,
                 repoTK.selectIDNV(global.Global.getUser()),
                 repoLDS.selectIDKH(txtSdtKH.getText()),
-                Double.parseDouble(txtTienCoc.getText()),
+                txtTienCoc.getText().isEmpty() ? 0 : Double.parseDouble(txtTienCoc.getText()),
                 cboCaDa.getSelectedIndex() + 1,
                 txtDate.getDate());
     }
@@ -124,9 +122,13 @@ public class FormDatSan extends javax.swing.JPanel {
         if (Uhelper.checkEmpty(txtSdtKH, "SĐT Khách Hàng Trống!")) {
             return false;
         }
+        if (Uhelper.CheckSDT(txtSdtKH, "SĐT Sai Định Dạng")) {
+            return false;
+        }
         if (Uhelper.checkEmpty(txtMaDs, "Mã Đặt Sân Trống!")) {
             return false;
         }
+
         if (Uhelper.checkSo(txtTienCoc) && txtTienCoc.getText().trim().length() != 0) {
             JOptionPane.showMessageDialog(this, "Tiền là Số");
             return false;
@@ -146,69 +148,67 @@ public class FormDatSan extends javax.swing.JPanel {
         LocalTime date = LocalTime.now();
         DateTimeFormatter DTF = DateTimeFormatter.ofPattern("H:mm");
         String h = DTF.format(date);
-
         LocalTime startTime = LocalTime.parse("06:16");
-        LocalTime endTime = LocalTime.of(8, 0);
-
         LocalTime startTime2 = LocalTime.parse("08:16");
-        LocalTime endTime2 = LocalTime.of(10, 0);
-
         LocalTime startTime3 = LocalTime.parse("10:16");
-        LocalTime endTime3 = LocalTime.of(12, 0);
-
         LocalTime startTime4 = LocalTime.parse("14:16");
-        LocalTime endTime4 = LocalTime.of(16, 0);
-
         LocalTime startTime5 = LocalTime.parse("16:16");
-        LocalTime endTime5 = LocalTime.of(18, 0);
-
         LocalTime startTime6 = LocalTime.parse("18:16");
-        LocalTime endTime6 = LocalTime.of(20, 0);
-
         LocalTime startTime7 = LocalTime.parse("20:16");
-        LocalTime endTime7 = LocalTime.of(22, 0);
+        ///////////////////////////////
+        LocalDate currentDate = LocalDate.now();
+        LocalDate selectedDate = txtDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        if (cboCaDa.getSelectedItem().equals("ca 1")) {
+        int comparisonResult = currentDate.compareTo(selectedDate);
+
+        if (comparisonResult > 0) {
+            JOptionPane.showMessageDialog(null, "Đã quá ngày đặt sân");
+            return false;
+        }
+        ///////////////////////////////----
+
+        if (cboCaDa.getSelectedItem().equals("ca 1") && comparisonResult == 0) {
             if (date.isAfter(startTime)) {
+                JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 1");
                 return false;
             }
         }
 
-        if (cboCaDa.getSelectedItem().equals("ca 2")) {
+        if (cboCaDa.getSelectedItem().equals("ca 2") && comparisonResult == 0) {
             if (date.isAfter(startTime2)) {
                 JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 2");
                 return false;
             }
         }
 
-        if (cboCaDa.getSelectedItem().equals("ca 3")) {
+        if (cboCaDa.getSelectedItem().equals("ca 3") && comparisonResult == 0) {
             if (date.isAfter(startTime3)) {
                 JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 3");
                 return false;
             }
         }
 
-        if (cboCaDa.getSelectedItem().equals("ca 4")) {
+        if (cboCaDa.getSelectedItem().equals("ca 4") && comparisonResult == 0) {
             if (date.isAfter(startTime4)) {
                 JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 4");
                 return false;
             }
         }
-        if (cboCaDa.getSelectedItem().equals("ca 5")) {
+        if (cboCaDa.getSelectedItem().equals("ca 5") && comparisonResult == 0) {
             if (date.isAfter(startTime5)) {
                 JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 5");
                 return false;
             }
         }
 
-        if (cboCaDa.getSelectedItem().equals("ca 6")) {
+        if (cboCaDa.getSelectedItem().equals("ca 6") && comparisonResult == 0) {
             if (date.isAfter(startTime6)) {
                 JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 6");
                 return false;
             }
         }
 
-        if (cboCaDa.getSelectedItem().equals("ca 7")) {
+        if (cboCaDa.getSelectedItem().equals("ca 7") && comparisonResult == 0) {
             if (date.isAfter(startTime7)) {
                 JOptionPane.showMessageDialog(null, "Đã quá giờ của ca 7");
                 return false;
@@ -242,6 +242,15 @@ public class FormDatSan extends javax.swing.JPanel {
         lbSan11A = new javax.swing.JLabel();
         lbSan11B = new javax.swing.JLabel();
         lbSan11C = new javax.swing.JLabel();
+        myButton1 = new swing.controls.MyButton();
+        myButton2 = new swing.controls.MyButton();
+        myButton3 = new swing.controls.MyButton();
+        myButton4 = new swing.controls.MyButton();
+        myButton5 = new swing.controls.MyButton();
+        myButton6 = new swing.controls.MyButton();
+        myButton7 = new swing.controls.MyButton();
+        myButton8 = new swing.controls.MyButton();
+        myButton9 = new swing.controls.MyButton();
         panelSeth1 = new swing.component.PanelSeth();
         btnDatSan = new swing.controls.ButtonGradient();
         btnHuySan = new swing.controls.ButtonGradient();
@@ -294,6 +303,8 @@ public class FormDatSan extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Danh Sách Đặt Sân");
 
+        txtDate.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+
         button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/rl.png"))); // NOI18N
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,28 +316,28 @@ public class FormDatSan extends javax.swing.JPanel {
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1174, Short.MAX_VALUE)
+                        .addGap(8, 8, 8))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
+                        .addGap(26, 26, 26))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
@@ -337,7 +348,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan5A.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan5A.setForeground(new java.awt.Color(255, 255, 0));
-        lbSan5A.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan5A.setText("Sân 5-A");
         lbSan5A.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -350,7 +360,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan5B.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan5B.setForeground(new java.awt.Color(255, 255, 0));
-        lbSan5B.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan5B.setText("Sân 5-B");
         lbSan5B.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -360,7 +369,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan5C.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan5C.setForeground(new java.awt.Color(255, 255, 0));
-        lbSan5C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan5C.setText("Sân 5-C");
         lbSan5C.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -370,7 +378,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan7A.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan7A.setForeground(new java.awt.Color(255, 255, 255));
-        lbSan7A.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan7A.setText("Sân 7-A");
         lbSan7A.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -380,7 +387,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan7B.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan7B.setForeground(new java.awt.Color(255, 255, 255));
-        lbSan7B.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan7B.setText("Sân 7-B");
         lbSan7B.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -390,7 +396,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan7C.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan7C.setForeground(new java.awt.Color(255, 255, 255));
-        lbSan7C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan7C.setText("Sân 7-C");
         lbSan7C.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -400,7 +405,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan11A.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan11A.setForeground(new java.awt.Color(28, 181, 224));
-        lbSan11A.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan11A.setText("Sân 11-A");
         lbSan11A.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -410,7 +414,6 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan11B.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan11B.setForeground(new java.awt.Color(28, 181, 224));
-        lbSan11B.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan11B.setText("Sân 11-B");
         lbSan11B.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -420,11 +423,73 @@ public class FormDatSan extends javax.swing.JPanel {
 
         lbSan11C.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbSan11C.setForeground(new java.awt.Color(28, 181, 224));
-        lbSan11C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
         lbSan11C.setText("Sân 11-C");
         lbSan11C.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbSan11CMouseClicked(evt);
+            }
+        });
+
+        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton1ActionPerformed(evt);
+            }
+        });
+
+        myButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton2ActionPerformed(evt);
+            }
+        });
+
+        myButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton3ActionPerformed(evt);
+            }
+        });
+
+        myButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton4ActionPerformed(evt);
+            }
+        });
+
+        myButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton5ActionPerformed(evt);
+            }
+        });
+
+        myButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton6ActionPerformed(evt);
+            }
+        });
+
+        myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton7ActionPerformed(evt);
+            }
+        });
+
+        myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton8ActionPerformed(evt);
+            }
+        });
+
+        myButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sb1.png"))); // NOI18N
+        myButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton9ActionPerformed(evt);
             }
         });
 
@@ -433,42 +498,99 @@ public class FormDatSan extends javax.swing.JPanel {
         panelSeth4Layout.setHorizontalGroup(
             panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeth4Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(12, 12, 12)
+                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbSan11A)
                     .addComponent(lbSan7A)
-                    .addComponent(lbSan5A))
-                .addGap(101, 101, 101)
+                    .addComponent(lbSan5A)
+                    .addComponent(lbSan11A))
+                .addGap(84, 84, 84)
+                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbSan5B)
-                    .addComponent(lbSan11B)
-                    .addComponent(lbSan7B))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbSan7C)
-                    .addComponent(lbSan5C)
-                    .addComponent(lbSan11C))
-                .addGap(17, 17, 17))
+                    .addComponent(lbSan7B)
+                    .addComponent(lbSan11B))
+                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelSeth4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth4Layout.createSequentialGroup()
+                                .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbSan7C)
+                                .addGap(26, 26, 26))
+                            .addGroup(panelSeth4Layout.createSequentialGroup()
+                                .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbSan5C)
+                                .addContainerGap())))
+                    .addGroup(panelSeth4Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbSan11C)
+                        .addGap(0, 19, Short.MAX_VALUE))))
         );
         panelSeth4Layout.setVerticalGroup(
             panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeth4Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbSan5A)
-                    .addComponent(lbSan5B)
-                    .addComponent(lbSan5C))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbSan7A)
-                    .addComponent(lbSan7B)
-                    .addComponent(lbSan7C))
-                .addGap(31, 31, 31)
-                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbSan11A)
-                    .addComponent(lbSan11B)
-                    .addComponent(lbSan11C))
-                .addGap(27, 27, 27))
+                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSeth4Layout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addComponent(lbSan5B))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth4Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelSeth4Layout.createSequentialGroup()
+                            .addGap(17, 17, 17)
+                            .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelSeth4Layout.createSequentialGroup()
+                                    .addGap(23, 23, 23)
+                                    .addComponent(lbSan5C))
+                                .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelSeth4Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lbSan5A)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelSeth4Layout.createSequentialGroup()
+                        .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbSan7A)
+                            .addComponent(lbSan7B))
+                        .addGap(49, 49, 49)
+                        .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth4Layout.createSequentialGroup()
+                                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbSan11A)
+                                    .addComponent(lbSan11B))
+                                .addGap(35, 35, 35))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth4Layout.createSequentialGroup()
+                                .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17))))
+                    .addGroup(panelSeth4Layout.createSequentialGroup()
+                        .addGroup(panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(myButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(myButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(myButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth4Layout.createSequentialGroup()
+                                .addComponent(lbSan7C)
+                                .addGap(17, 17, 17)))
+                        .addGap(51, 51, 51)
+                        .addComponent(lbSan11C)
+                        .addGap(38, 38, 38))))
         );
 
         panelSeth1.setColor1(new java.awt.Color(241, 208, 62));
@@ -639,7 +761,7 @@ public class FormDatSan extends javax.swing.JPanel {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtTienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         panelSeth3Layout.setVerticalGroup(
             panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -690,19 +812,18 @@ public class FormDatSan extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(panelSeth4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelSeth3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelSeth4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panelSeth3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelSeth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33))))
+                    .addComponent(panelSeth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -754,7 +875,7 @@ public class FormDatSan extends javax.swing.JPanel {
     }//GEN-LAST:event_btnHuySanActionPerformed
 
     private void btnNhanSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanSanActionPerformed
-        // TODO add your handling code here:
+
         try {
             String id = tbDatSan.getValueAt(index, 0).toString();
             String getND = tbDatSan.getValueAt(index, 6).toString();
@@ -765,9 +886,11 @@ public class FormDatSan extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }//GEN-LAST:event_btnNhanSanActionPerformed
 
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+
         if (txtSearch.isSelected()) {
             int option = txtSearch.getSelectedIndex();
 
@@ -777,6 +900,7 @@ public class FormDatSan extends javax.swing.JPanel {
                 fillTable(qlds.getList());
             }
         }
+
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void txtMaDsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaDsActionPerformed
@@ -789,96 +913,50 @@ public class FormDatSan extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNhanSan1ActionPerformed
 
     private void lbSan5AMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan5AMouseClicked
-        // TODO add your handling code here:
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan5A.getText().trim();
-            fillTable(qlds.getListSan(lbSan5A.getText().trim(), txtDate.getDate()));
-        }
+
     }//GEN-LAST:event_lbSan5AMouseClicked
 
     private void lbSan5BMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan5BMouseClicked
         // TODO add your handling code here:\
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan5B.getText().trim();
-            fillTable(qlds.getListSan(lbSan5B.getText().trim(), txtDate.getDate()));
-        }
+
     }//GEN-LAST:event_lbSan5BMouseClicked
 
     private void lbSan5CMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan5CMouseClicked
         // TODO add your handling code here:
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan5C.getText().trim();
-            fillTable(qlds.getListSan(lbSan5C.getText().trim(), txtDate.getDate()));
-        }
+
     }//GEN-LAST:event_lbSan5CMouseClicked
 
     private void lbSan7AMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan7AMouseClicked
         // TODO add your handling code here:
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan7A.getText().trim();
-            fillTable(qlds.getListSan(lbSan7A.getText().trim(), txtDate.getDate()));
-        }
+
 
     }//GEN-LAST:event_lbSan7AMouseClicked
 
     private void lbSan7BMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan7BMouseClicked
         // TODO add your handling code here:
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan7B.getText().trim();
-            fillTable(qlds.getListSan(lbSan7B.getText().trim(), txtDate.getDate()));
-        }
+
 
     }//GEN-LAST:event_lbSan7BMouseClicked
 
     private void lbSan7CMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan7CMouseClicked
         // TODO add your handling code here:
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan7C.getText().trim();
-            fillTable(qlds.getListSan(lbSan7C.getText().trim(), txtDate.getDate()));
-        }
+
     }//GEN-LAST:event_lbSan7CMouseClicked
 
     private void lbSan11AMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan11AMouseClicked
         // TODO add your handling code here:
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan11A.getText().trim();
-            fillTable(qlds.getListSan(lbSan11A.getText().trim(), txtDate.getDate()));
-        }
+
     }//GEN-LAST:event_lbSan11AMouseClicked
 
     private void lbSan11BMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan11BMouseClicked
         // TODO add your handling code here:
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan11B.getText().trim();
-            fillTable(qlds.getListSan(lbSan11B.getText().trim(), txtDate.getDate()));
-        }
+
     }//GEN-LAST:event_lbSan11BMouseClicked
 
     private void lbSan11CMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan11CMouseClicked
         // TODO add your handling code here:
 
-        if (txtDate.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
-        } else {
-            check = lbSan11C.getText().trim();
-            fillTable(qlds.getListSan(lbSan11C.getText().trim(), txtDate.getDate()));
-        }
+
     }//GEN-LAST:event_lbSan11CMouseClicked
 
     private void txtTienCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienCocActionPerformed
@@ -898,6 +976,97 @@ public class FormDatSan extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillTable(qlds.getList());
     }//GEN-LAST:event_button1ActionPerformed
+
+    private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan5A.getText().trim();
+            fillTable(qlds.getListSan(lbSan5A.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton2ActionPerformed
+
+    private void myButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton4ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan5B.getText().trim();
+            fillTable(qlds.getListSan(lbSan5B.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton4ActionPerformed
+
+    private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan11C.getText().trim();
+            fillTable(qlds.getListSan(lbSan11C.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton7ActionPerformed
+
+    private void myButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton9ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan5C.getText().trim();
+            fillTable(qlds.getListSan(lbSan5C.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton9ActionPerformed
+
+    private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan7A.getText().trim();
+            fillTable(qlds.getListSan(lbSan7A.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton3ActionPerformed
+
+    private void myButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton5ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan7B.getText().trim();
+            fillTable(qlds.getListSan(lbSan7B.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton5ActionPerformed
+
+    private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan7C.getText().trim();
+            fillTable(qlds.getListSan(lbSan7C.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton8ActionPerformed
+
+    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan11A.getText().trim();
+            fillTable(qlds.getListSan(lbSan11A.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton1ActionPerformed
+
+    private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
+        // TODO add your handling code here:
+        if (txtDate.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
+        } else {
+            check = lbSan11B.getText().trim();
+            fillTable(qlds.getListSan(lbSan11B.getText().trim(), txtDate.getDate()));
+        }
+    }//GEN-LAST:event_myButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -923,6 +1092,15 @@ public class FormDatSan extends javax.swing.JPanel {
     private javax.swing.JLabel lbSan7A;
     private javax.swing.JLabel lbSan7B;
     private javax.swing.JLabel lbSan7C;
+    private swing.controls.MyButton myButton1;
+    private swing.controls.MyButton myButton2;
+    private swing.controls.MyButton myButton3;
+    private swing.controls.MyButton myButton4;
+    private swing.controls.MyButton myButton5;
+    private swing.controls.MyButton myButton6;
+    private swing.controls.MyButton myButton7;
+    private swing.controls.MyButton myButton8;
+    private swing.controls.MyButton myButton9;
     private swing.swing.PanelBorder panelBorder1;
     private swing.component.PanelSeth panelSeth1;
     private swing.component.PanelSeth panelSeth3;

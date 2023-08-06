@@ -71,7 +71,7 @@ public class RPLichDatSan {
 
     public List<LichDatSanCT> loadTableDV() {
         ArrayList<LichDatSanCT> lst = new ArrayList<>();
-        String sql = "SELECT b.Ma, c.ten as tenSan, a.ten as tenKH, b.TrangThai "
+        String sql = "SELECT b.Ma, c.ten as tenSan, b.ID_CaDa ,c.LoaiSan, a.ten as tenKH, b.TrangThai "
                 + " FROM dbo.KhachHang a right JOIN dbo.LichDat_SanBong b ON b.ID_KH = a.ID "
                 + " LEFT JOIN dbo.SanBong c ON c.ID = b.ID_SB left JOIN dbo.NhanVien d ON  d.ID = b.ID_NV Where trangThai = 1 OR trangThai = 2";
 
@@ -87,6 +87,8 @@ public class RPLichDatSan {
                 lsd.setTenSan(rs.getString("tenSan"));
                 lsd.setTenKh(rs.getString("tenKH"));
                 lsd.setTrangThai(rs.getInt("trangThai"));
+                lsd.setCa(rs.getInt("ID_CaDa"));
+                lsd.setLoai(rs.getInt("LoaiSan"));
 
                 lst.add(lsd);
             }

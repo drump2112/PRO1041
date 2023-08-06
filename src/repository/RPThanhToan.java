@@ -36,4 +36,59 @@ public class RPThanhToan {
         }
         return null;
     }
+
+    public Double giaTien(String mds, int caDa) {
+        Connection c = DbConnection.getConnection();
+        if (caDa > 5) {
+            String sql = "SELECT b.gia2 FROM dbo.LichDat_SanBong a LEFT JOIN dbo.SanBong b ON b.ID = a.ID_SB WHERE a.Ma = ? ";
+            try {
+
+                PreparedStatement pts = c.prepareStatement(sql);
+                pts.setObject(1, mds);
+                ResultSet rs = pts.executeQuery();
+                if (rs.next()) {
+                    return rs.getDouble("gia2");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        } else {
+            String sql = "SELECT b.gia FROM dbo.LichDat_SanBong a LEFT JOIN dbo.SanBong b ON b.ID = a.ID_SB WHERE a.Ma = ? ";
+            try {
+
+                PreparedStatement pts = c.prepareStatement(sql);
+                pts.setObject(1, mds);
+                ResultSet rs = pts.executeQuery();
+                if (rs.next()) {
+                    return rs.getDouble("gia");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    public Double getTienCoc(String mds) {
+        Connection c = DbConnection.getConnection();
+
+        String sql = "SELECT  TienDatCoc FROM dbo.LichDat_SanBong WHERE ma  = ? ";
+        try {
+
+            PreparedStatement pts = c.prepareStatement(sql);
+            pts.setObject(1, mds);
+            ResultSet rs = pts.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("TienDatCoc");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
