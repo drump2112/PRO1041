@@ -20,16 +20,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceTaiKhoan.java</file>
             <file>file:/D:/workspace/FPT/SOF2041/src/view/FormDatSan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormService.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormThongKe.java</file>
             <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPLichDatSan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/domainModel/GioHang.java</file>
             <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceThanhToan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/global/Uhelper.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPThanhToan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormQLKH.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormThanhToan.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormHD.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPChucVu.java</file>
             <file>file:/D:/workspace/FPT/SOF2041/src/view/FormAdmin.java</file>
         </group>
     </open-files>

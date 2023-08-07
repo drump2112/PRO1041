@@ -9,6 +9,7 @@ import domainModel.LichDatSanCT;
 import global.Global;
 import java.awt.Color;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -230,13 +231,8 @@ public class FormThanhToan extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth3Layout.createSequentialGroup()
                         .addGap(0, 98, Short.MAX_VALUE)
-                        .addGroup(panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth3Layout.createSequentialGroup()
-                                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth3Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51))))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))
                     .addGroup(panelSeth3Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,6 +254,10 @@ public class FormThanhToan extends javax.swing.JPanel {
                             .addComponent(txtNguoiLap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtTenKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         panelSeth3Layout.setVerticalGroup(
             panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,9 +289,9 @@ public class FormThanhToan extends javax.swing.JPanel {
                     .addComponent(txtTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(9, 9, 9))
         );
 
         spTable.setBorder(null);
@@ -391,13 +391,13 @@ public class FormThanhToan extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                    .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
                     .addComponent(spTable1))
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelSeth3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelSeth4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,6 +455,7 @@ public class FormThanhToan extends javax.swing.JPanel {
         Double tongTien = tongTienDv + qltt.giaSan(mds, cada);
         Double tienCoc = qltt.tienDatCoc(mds);
         double ThanhTien = 0;
+
         if (cb2.isSelected()) {
             ThanhTien = tongTien - tienCoc - (tongTien * 0.02);
             txtTT.setText(String.valueOf(ThanhTien));
@@ -469,7 +470,8 @@ public class FormThanhToan extends javax.swing.JPanel {
         txtTenKH.setText(tbDss.getValueAt(index, 4).toString());
         txtTienCoc.setText(tienCoc.toString());
         txtTongTien.setText(tongTien.toString());
-
+        cb5.setSelected(false);
+        cb2.setSelected(false);
 
     }//GEN-LAST:event_tbDssMouseClicked
 
@@ -479,10 +481,57 @@ public class FormThanhToan extends javax.swing.JPanel {
 
     private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
         // TODO add your handling code here:
+        index = tbDss.getSelectedRow();
+
+        fillTableDv(qlgh.getListOrder(tbDss.getValueAt(index, 0).toString()));
+
+        int cada = (int) tbDss.getValueAt(index, 3);
+        String mds = tbDss.getValueAt(index, 0).toString();
+        Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
+        Double tongTien = tongTienDv + qltt.giaSan(mds, cada);
+        Double tienCoc = qltt.tienDatCoc(mds);
+        double ThanhTien = 0;
+        if (cb5.isSelected() && cb2.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Không được áp dụng 2 mã giảm giá");
+            cb5.setSelected(false);
+        }
+        if (cb2.isSelected()) {
+            ThanhTien = tongTien - tienCoc - (tongTien * 0.02);
+            txtTT.setText(String.valueOf(ThanhTien));
+        } else {
+            ThanhTien = tongTien - tienCoc;
+            txtTT.setText(String.valueOf(ThanhTien));
+        }
+
+
     }//GEN-LAST:event_cb2ActionPerformed
 
     private void cb5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb5ActionPerformed
         // TODO add your handling code here:
+        index = tbDss.getSelectedRow();
+        index = tbDss.getSelectedRow();
+
+        fillTableDv(qlgh.getListOrder(tbDss.getValueAt(index, 0).toString()));
+
+        int cada = (int) tbDss.getValueAt(index, 3);
+        String mds = tbDss.getValueAt(index, 0).toString();
+        Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
+        Double tongTien = tongTienDv + qltt.giaSan(mds, cada);
+        Double tienCoc = qltt.tienDatCoc(mds);
+        double ThanhTien = 0;
+
+        if (cb2.isSelected() && cb5.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Không được áp dụng 2 mã giảm giá");
+            cb2.setSelected(false);
+        }
+
+        if (cb5.isSelected()) {
+            ThanhTien = tongTien - tienCoc - (tongTien * 0.05);
+            txtTT.setText(String.valueOf(ThanhTien));
+        } else {
+            ThanhTien = tongTien - tienCoc;
+            txtTT.setText(String.valueOf(ThanhTien));
+        }
     }//GEN-LAST:event_cb5ActionPerformed
 
 
