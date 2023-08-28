@@ -70,19 +70,19 @@ public class RPTaiKhoan {
     public String selectIDNV(String user) {
         Connection c = DbConnection.getConnection();
         String idnv = "";
-        String sql = "SELECT NhanVien.ID FROM dbo.TaiKhoan   JOIN dbo.NhanVien ON  NhanVien.ID = TaiKhoan.id_nv WHERE TenDangNhap = ? ";
+        String sql = "SELECT ID_NV  FROM dbo.TaiKhoan WHERE TenDangNhap = ? ";
         try {
             PreparedStatement pts = c.prepareStatement(sql);
             pts.setObject(1, user);
             ResultSet rs = pts.executeQuery();
             if (rs.next()) {
-                idnv = rs.getString("ID");
+                idnv = rs.getString("ID_NV");
                 return idnv;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Fail";
+        return idnv;
     }
 
     public NhanVien infoStaff(String id) {
@@ -157,4 +157,5 @@ public class RPTaiKhoan {
         RPTaiKhoan rp = new RPTaiKhoan();
         System.out.println(rp.getNameStaff("toitq2002"));
     }
+
 }

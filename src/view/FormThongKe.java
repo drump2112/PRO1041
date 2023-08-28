@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import swing.chart.ModelPolarAreaChart;
+import swing.chart.ModelPieChart;
 import swing.swing.ScrollBar;
 
 /**
@@ -35,20 +35,25 @@ public class FormThongKe extends javax.swing.JPanel {
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
 
-        chart.addItem(new ModelPolarAreaChart(new Color(52, 148, 203), "Sân 5", 60));
-        chart.addItem(new ModelPolarAreaChart(new Color(175, 67, 237), "Sân 7", 50));
-        chart.addItem(new ModelPolarAreaChart(new Color(87, 218, 137), "Sân 11", 30));
-
-        chart.start();
+//        chart.addItem(new ModelPolarAreaChart(new Color(52, 148, 203), "Sân 5", 60));
+//        chart.addItem(new ModelPolarAreaChart(new Color(175, 67, 237), "Sân 7", 50));
+//        chart.addItem(new ModelPolarAreaChart(new Color(87, 218, 137), "Sân 11", 30));
+//
+//        chart.start();
     }
 
-    private void showData(int year, int month) {
-        String sql = "";
+    private void showData(int month, int year) {
+        String sql = "SELECT c.LoaiSan, SUM(a.TongTien)  AS tongtien FROM dbo.HoaDon a LEFT JOIN dbo.LichDat_SanBong b ON  b.Ma = a.Ma_LichDatSan LEFT JOIN  dbo.SanBong c ON c.ID = b.ID_SB   "
+                + " WHERE MONTH(a.NgayThanhToan) = ? AND YEAR(a.NgayThanhToan) = ? GROUP BY c.LoaiSan";
         try (Connection con = DbConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             int index = 0;
+            ps.setObject(1, month);
+            ps.setObject(2, year);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
+                String loaiSan = String.valueOf(rs.getInt(1));
+                double value = rs.getDouble(2);
+                pieChart.addData(new ModelPieChart(loaiSan,value,getColor(index++)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,6 +64,12 @@ public class FormThongKe extends javax.swing.JPanel {
         Color[] color = new Color[]{new Color(52, 148, 203), new Color(175, 67, 237), new Color(87, 218, 137)};
 
         return color[index];
+    }
+
+    private String getTenSan(int index) {
+        String[] String = new String[]{"Sân 5", "Sân 7", "Sân 11"};
+
+        return String[index];
     }
 
     /**
@@ -74,15 +85,18 @@ public class FormThongKe extends javax.swing.JPanel {
         txtYear = new com.toedter.calendar.JYearChooser();
         txtMonth = new com.toedter.calendar.JMonthChooser();
         button1 = new swing.controls.Button();
+        line = new javax.swing.JPanel();
         spTable = new javax.swing.JScrollPane();
         table1 = new swing.swing.Table();
-        chart = new swing.chart.PolarAreaChart();
+        pieChart = new swing.chart.PieChart();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1125, 584));
 
         panelSeth1.setColor1(new java.awt.Color(87, 218, 137));
         panelSeth1.setColor2(new java.awt.Color(0, 0, 0));
+
+        txtYear.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         txtMonth.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
@@ -94,6 +108,20 @@ public class FormThongKe extends javax.swing.JPanel {
             }
         });
 
+        line.setBackground(new java.awt.Color(255, 255, 255));
+        line.setPreferredSize(new java.awt.Dimension(0, 1));
+
+        javax.swing.GroupLayout lineLayout = new javax.swing.GroupLayout(line);
+        line.setLayout(lineLayout);
+        lineLayout.setHorizontalGroup(
+            lineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 308, Short.MAX_VALUE)
+        );
+        lineLayout.setVerticalGroup(
+            lineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelSeth1Layout = new javax.swing.GroupLayout(panelSeth1);
         panelSeth1.setLayout(panelSeth1Layout);
         panelSeth1Layout.setHorizontalGroup(
@@ -103,19 +131,30 @@ public class FormThongKe extends javax.swing.JPanel {
                 .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(55, 55, 55)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(41, 41, 41))
+            .addGroup(panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelSeth1Layout.createSequentialGroup()
+                    .addGap(73, 73, 73)
+                    .addComponent(line, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .addGap(73, 73, 73)))
         );
         panelSeth1Layout.setVerticalGroup(
             panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeth1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtMonth, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                    .addComponent(txtYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtMonth, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                        .addComponent(txtYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelSeth1Layout.createSequentialGroup()
+                    .addGap(55, 55, 55)
+                    .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         spTable.setBorder(null);
@@ -133,16 +172,14 @@ public class FormThongKe extends javax.swing.JPanel {
         ));
         spTable.setViewportView(table1);
 
-        chart.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
+                .addComponent(pieChart, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                     .addComponent(panelSeth1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -151,14 +188,16 @@ public class FormThongKe extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addComponent(panelSeth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92)
-                        .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                        .addGap(130, 130, 130)
+                        .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(pieChart, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,15 +205,16 @@ public class FormThongKe extends javax.swing.JPanel {
         // TODO add your handling code here:
         int month = txtMonth.getMonth();
         int year = txtYear.getYear();
-        
+
         showData(year, month);
     }//GEN-LAST:event_button1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.controls.Button button1;
-    private swing.chart.PolarAreaChart chart;
+    private javax.swing.JPanel line;
     private swing.component.PanelSeth panelSeth1;
+    private swing.chart.PieChart pieChart;
     private javax.swing.JScrollPane spTable;
     private swing.swing.Table table1;
     private com.toedter.calendar.JMonthChooser txtMonth;

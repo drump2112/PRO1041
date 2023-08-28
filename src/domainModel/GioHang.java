@@ -50,6 +50,12 @@ public class GioHang {
         this.soLuong = soLuong;
     }
 
+    public GioHang(String tenDv, int soLuong, Double giaTien) {
+        this.tenDv = tenDv;
+        this.soLuong = soLuong;
+        this.giaTien = giaTien;
+    }
+
     public String getId() {
         return id;
     }

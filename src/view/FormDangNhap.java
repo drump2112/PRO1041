@@ -154,9 +154,11 @@ public class FormDangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         String user = txtUser.getText();
         String pass = String.valueOf(txtPass.getPassword());
+        String idnv = qltk.selectIDNV(user);
         Global gl = new Global();
 
         gl.setUser(user);
+        gl.setIdnv(idnv);
 
         if (qltk.DangNhap(user, pass).equals("NV")) {
             this.dispose();

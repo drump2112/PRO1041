@@ -126,24 +126,25 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                      <Component id="jlWater1" min="-2" pref="83" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="btnWater" min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jLabel2" min="-2" pref="95" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jsNcLoc" alignment="1" pref="84" max="32767" attributes="0"/>
-                                          <Component id="jlWater" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                              <Component id="buttonOutLine1" min="-2" pref="26" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="buttonOutLine3" min="-2" pref="26" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jlWater1" min="-2" pref="83" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel2" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="jsNcLoc" alignment="1" pref="84" max="32767" attributes="0"/>
+                                                      <Component id="jlWater" alignment="1" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -156,17 +157,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Component id="jlWater1" min="-2" pref="27" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlWater" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsNcLoc" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine1" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine3" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnWater" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -200,22 +198,15 @@
                         <Property name="text" type="java.lang.String" value="N&#x1b0;&#x1edb;c L&#x1ecd;c"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine1">
+                    <Component class="swing.controls.ButtonOutLine" name="btnWater">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWaterActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine3">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -231,27 +222,23 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                          <Component id="buttonOutLine2" min="-2" pref="26" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="buttonOutLine4" min="-2" pref="26" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="bimbim" pref="84" max="32767" attributes="0"/>
-                                                  <Component id="jsSnack" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Component id="jlWater3" alignment="1" min="-2" pref="83" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="bimbim" pref="84" max="32767" attributes="0"/>
+                                              <Component id="jsSnack" max="32767" attributes="0"/>
                                           </Group>
+                                          <Component id="jlWater3" alignment="1" min="-2" pref="83" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel3" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="btnSack" min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -270,10 +257,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsSnack" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine2" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine4" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnSack" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -307,22 +291,15 @@
                         <Property name="text" type="java.lang.String" value="Bim Bim"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine2">
+                    <Component class="swing.controls.ButtonOutLine" name="btnSack">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSackActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine4">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -351,12 +328,6 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jsBong" alignment="1" pref="84" max="32767" attributes="0"/>
                                   <Component id="bong" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Component id="buttonOutLine5" min="-2" pref="26" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="buttonOutLine6" min="-2" pref="26" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
                               <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
@@ -368,6 +339,11 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jlWater5" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="btnBall" min="-2" pref="26" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -384,10 +360,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsBong" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine5" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine6" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnBall" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -421,22 +394,15 @@
                         <Property name="text" type="java.lang.String" value="B&#xf3;ng"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine5">
+                    <Component class="swing.controls.ButtonOutLine" name="btnBall">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine5ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBallActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine6">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -457,12 +423,6 @@
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="jsCoca" alignment="1" pref="84" max="32767" attributes="0"/>
                                           <Component id="coCa" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                              <Component id="buttonOutLine7" min="-2" pref="26" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="buttonOutLine8" min="-2" pref="26" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -472,6 +432,10 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                       <Component id="jlWater7" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                      <Component id="btnCoca" min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -490,10 +454,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsCoca" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine7" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine8" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnCoca" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -532,22 +493,15 @@
                         <Property name="text" type="java.lang.String" value="Coca"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine7">
+                    <Component class="swing.controls.ButtonOutLine" name="btnCoca">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine7ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCocaActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine8">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -571,27 +525,27 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                      <Component id="jlWater9" min="-2" pref="75" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel6" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="jsQA" alignment="1" pref="84" max="32767" attributes="0"/>
-                                              <Component id="quanAo" alignment="1" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                                  <Component id="buttonOutLine9" min="-2" pref="26" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="buttonOutLine10" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                          <Component id="jlWater9" min="-2" pref="75" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jLabel6" min="-2" pref="95" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jsQA" alignment="1" pref="84" max="32767" attributes="0"/>
+                                                  <Component id="quanAo" alignment="1" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="btTee" min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -610,10 +564,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsQA" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine9" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine10" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btTee" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -647,22 +598,15 @@
                         <Property name="text" type="java.lang.String" value="Qu&#x1ea7;n &#xc1;o"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine9">
+                    <Component class="swing.controls.ButtonOutLine" name="btTee">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine9ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTeeActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine10">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -676,23 +620,25 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel7" min="-2" pref="95" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jsShose" alignment="1" pref="84" max="32767" attributes="0"/>
-                                      <Component id="giay" alignment="1" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                          <Component id="buttonOutLine11" min="-2" pref="26" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="buttonOutLine12" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel7" min="-2" pref="95" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jsShose" alignment="1" pref="84" max="32767" attributes="0"/>
+                                              <Component id="giay" alignment="1" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="aaaa" min="-2" pref="41" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Component id="aaaa" min="-2" pref="41" max="-2" attributes="0"/>
-                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                      <Component id="btShoes" min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -711,10 +657,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsShose" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine11" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine12" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btShoes" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -748,22 +691,15 @@
                         <Property name="text" type="java.lang.String" value="Gi&#xe0;y"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine11">
+                    <Component class="swing.controls.ButtonOutLine" name="btShoes">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine11ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btShoesActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine12">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -792,12 +728,6 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jsXx" alignment="1" pref="84" max="32767" attributes="0"/>
                                   <Component id="xucXich" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Component id="buttonOutLine13" min="-2" pref="26" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="buttonOutLine14" min="-2" pref="26" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
                               <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
@@ -809,24 +739,26 @@
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="btnXX" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" pref="83" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jLabel8" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlWater6" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="xucXich" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsXx" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine13" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine14" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnXX" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -860,22 +792,15 @@
                         <Property name="text" type="java.lang.String" value="X&#xfa;c X&#xed;ch"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine13">
+                    <Component class="swing.controls.ButtonOutLine" name="btnXX">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine13ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXXActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine14">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -889,19 +814,13 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="jsRv" alignment="1" pref="84" max="32767" attributes="0"/>
                                           <Component id="revive" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                              <Component id="buttonOutLine15" min="-2" pref="26" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="buttonOutLine16" min="-2" pref="26" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -911,6 +830,10 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel9" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="btnRV" min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -929,10 +852,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jsRv" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="buttonOutLine15" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="buttonOutLine16" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnRV" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -966,22 +886,15 @@
                         <Property name="text" type="java.lang.String" value="Revive"/>
                       </Properties>
                     </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine15">
+                    <Component class="swing.controls.ButtonOutLine" name="btnRV">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/icons8-plus-20.png"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutLine15ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRVActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="swing.controls.ButtonOutLine" name="buttonOutLine16">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8-minus-20.png"/>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1012,10 +925,10 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="621" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="632" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1081,7 +994,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnHuyDV" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnClear" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnThemDV" pref="86" max="32767" attributes="0"/>
                       <Component id="btnThemDV1" alignment="0" pref="86" max="32767" attributes="0"/>
                   </Group>
@@ -1096,9 +1009,9 @@
                   <Component id="btnThemDV" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
                   <Component id="btnThemDV1" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="btnHuyDV" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="btnClear" min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1121,9 +1034,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemDVActionPerformed"/>
           </Events>
         </Component>
-        <Component class="swing.controls.ButtonGradient" name="btnHuyDV">
+        <Component class="swing.controls.ButtonGradient" name="btnClear">
           <Properties>
-            <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
+            <Property name="text" type="java.lang.String" value="Clear"/>
             <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fc" green="6a" red="39" type="rgb"/>
             </Property>
@@ -1135,12 +1048,12 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHuyDVActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearActionPerformed"/>
           </Events>
         </Component>
         <Component class="swing.controls.ButtonGradient" name="btnThemDV1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+            <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
             <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fc" green="6a" red="39" type="rgb"/>
             </Property>

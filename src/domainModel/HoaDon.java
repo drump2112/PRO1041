@@ -11,37 +11,30 @@ import java.util.Date;
  * @author sethk
  */
 public class HoaDon {
-    private String id; 
+
+    private String id;
     private String ma;
-    private String idLDS;
+    private String malds;
     private String idnv;
     private String idkh;
-    private String idv;
-    private String hinhThucThanhToan;
-    private Integer trangThai;
-    private Integer soGioDa;
-    private Double chiPhiPhatSinh;
-    private String khuyenMai;
+    private int trangThai;
+
+    private String tenKM;
+    private String idGH;
     private Double tongTien;
-    private Date ngayThanhToan;
 
     public HoaDon() {
     }
 
-    public HoaDon(String id, String ma, String idLDS, String idnv, String idkh, String idv, String hinhThucThanhToan, Integer trangThai, Integer soGioDa, Double chiPhiPhatSinh, String khuyenMai, Double tongTien, Date ngayThanhToan) {
-        this.id = id;
-        this.ma = ma;
-        this.idLDS = idLDS;
+    public HoaDon(String mslds, String idnv, String idkh, int trangThai, String tenKM, String idGH, Double tongTien) {
+        
+        this.malds = mslds;
         this.idnv = idnv;
         this.idkh = idkh;
-        this.idv = idv;
-        this.hinhThucThanhToan = hinhThucThanhToan;
         this.trangThai = trangThai;
-        this.soGioDa = soGioDa;
-        this.chiPhiPhatSinh = chiPhiPhatSinh;
-        this.khuyenMai = khuyenMai;
+        this.tenKM = tenKM;
+        this.idGH = idGH;
         this.tongTien = tongTien;
-        this.ngayThanhToan = ngayThanhToan;
     }
 
     public String getId() {
@@ -60,12 +53,12 @@ public class HoaDon {
         this.ma = ma;
     }
 
-    public String getIdLDS() {
-        return idLDS;
+    public String getMslds() {
+        return malds;
     }
 
-    public void setIdLDS(String idLDS) {
-        this.idLDS = idLDS;
+    public void setMslds(String mslds) {
+        this.malds = mslds;
     }
 
     public String getIdnv() {
@@ -84,52 +77,28 @@ public class HoaDon {
         this.idkh = idkh;
     }
 
-    public String getIdv() {
-        return idv;
-    }
-
-    public void setIdv(String idv) {
-        this.idv = idv;
-    }
-
-    public String getHinhThucThanhToan() {
-        return hinhThucThanhToan;
-    }
-
-    public void setHinhThucThanhToan(String hinhThucThanhToan) {
-        this.hinhThucThanhToan = hinhThucThanhToan;
-    }
-
-    public Integer getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(Integer trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
-    public Integer getSoGioDa() {
-        return soGioDa;
+    public String getTenKM() {
+        return tenKM;
     }
 
-    public void setSoGioDa(Integer soGioDa) {
-        this.soGioDa = soGioDa;
+    public void setTenKM(String tenKM) {
+        this.tenKM = tenKM;
     }
 
-    public Double getChiPhiPhatSinh() {
-        return chiPhiPhatSinh;
+    public String getIdGH() {
+        return idGH;
     }
 
-    public void setChiPhiPhatSinh(Double chiPhiPhatSinh) {
-        this.chiPhiPhatSinh = chiPhiPhatSinh;
-    }
-
-    public String getKhuyenMai() {
-        return khuyenMai;
-    }
-
-    public void setKhuyenMai(String khuyenMai) {
-        this.khuyenMai = khuyenMai;
+    public void setIdGH(String idGH) {
+        this.idGH = idGH;
     }
 
     public Double getTongTien() {
@@ -139,15 +108,7 @@ public class HoaDon {
     public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
     }
-
-    public Date getNgayThanhToan() {
-        return ngayThanhToan;
-    }
-
-    public void setNgayThanhToan(Date ngayThanhToan) {
-        this.ngayThanhToan = ngayThanhToan;
-    }
     
     
-            
+
 }

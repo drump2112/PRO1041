@@ -29,7 +29,7 @@ public class FormAdmin extends javax.swing.JFrame {
     FormQlHoaDon formQlhd;
     FormQLTaiKhoan formQltk;
     FormService formSv;
-
+    FormHoaDonCho formW;
     service.ServiceTaiKhoan qltk = new ServiceTaiKhoan();
 
     /**
@@ -53,7 +53,7 @@ public class FormAdmin extends javax.swing.JFrame {
         formQlhd = new FormQlHoaDon();
         formQltk = new FormQLTaiKhoan();
         formSv = new FormService();
-
+        formW = new FormHoaDonCho();
         menu.initMoving(FormAdmin.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -66,6 +66,8 @@ public class FormAdmin extends javax.swing.JFrame {
                     setForm(formTT);
                 } else if (index == 3) {
                     setForm(formTK);
+                } else if (index == 4) {
+                    setForm(formW);
                 } else if (index == 5) {
                     setForm(formGc);
                 } else if (index == 9) {

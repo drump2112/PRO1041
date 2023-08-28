@@ -4,16 +4,22 @@
  */
 package view;
 
+import domainModel.Bill;
 import domainModel.GioHang;
+import domainModel.HoaDon;
 import domainModel.LichDatSanCT;
 import global.Global;
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import service.ServiceGioHang;
+import service.ServiceHoaDon;
 import service.ServiceLichDatSan;
 import service.ServiceTaiKhoan;
 import service.ServiceThanhToan;
@@ -34,6 +40,7 @@ public class FormThanhToan extends javax.swing.JPanel {
     ServiceGioHang qlgh = new ServiceGioHang();
     service.ServiceTaiKhoan qltk = new ServiceTaiKhoan();
     ServiceThanhToan qltt = new ServiceThanhToan();
+    ServiceHoaDon qlhd = new ServiceHoaDon();
 
     /**
      * Creates new form FormThanhToan
@@ -116,6 +123,7 @@ public class FormThanhToan extends javax.swing.JPanel {
         txtTT = new swing.controls.TextField();
         jLabel11 = new javax.swing.JLabel();
         txtTenKH = new swing.controls.TextField();
+        btChoTT = new swing.controls.Button();
         spTable = new javax.swing.JScrollPane();
         tbDss = new swing.swing.Table();
         jLabel7 = new javax.swing.JLabel();
@@ -219,6 +227,15 @@ public class FormThanhToan extends javax.swing.JPanel {
             }
         });
 
+        btChoTT.setForeground(new java.awt.Color(204, 204, 204));
+        btChoTT.setText("Chờ Thanh Toán");
+        btChoTT.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btChoTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btChoTTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelSeth3Layout = new javax.swing.GroupLayout(panelSeth3);
         panelSeth3.setLayout(panelSeth3Layout);
         panelSeth3Layout.setHorizontalGroup(
@@ -255,9 +272,11 @@ public class FormThanhToan extends javax.swing.JPanel {
                             .addComponent(txtTenKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSeth3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
+                .addComponent(btChoTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(32, 32, 32))
         );
         panelSeth3Layout.setVerticalGroup(
             panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +294,7 @@ public class FormThanhToan extends javax.swing.JPanel {
                 .addGroup(panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -290,7 +309,9 @@ public class FormThanhToan extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btChoTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9))
         );
 
@@ -345,7 +366,7 @@ public class FormThanhToan extends javax.swing.JPanel {
 
         cb2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         cb2.setForeground(new java.awt.Color(255, 255, 255));
-        cb2.setText("Giảm 2% tổng bill");
+        cb2.setText("Giảm 2% tổng bill >= 400000");
         cb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb2ActionPerformed(evt);
@@ -354,7 +375,7 @@ public class FormThanhToan extends javax.swing.JPanel {
 
         cb5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         cb5.setForeground(new java.awt.Color(255, 255, 255));
-        cb5.setText("Giảm 5% tổng bill");
+        cb5.setText("Giảm 5% tổng bill >= 600000");
         cb5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb5ActionPerformed(evt);
@@ -422,8 +443,55 @@ public class FormThanhToan extends javax.swing.JPanel {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         // TODO add your handling code here:
-        FormHD form = new FormHD();
-        form.setVisible(true);
+        int click = JOptionPane.showConfirmDialog(this, "Chắc Chắn Thanh Toán ?");
+
+        if (click == JOptionPane.YES_OPTION) {
+
+            int cada = (int) tbDss.getValueAt(index, 3);
+            String mds = tbDss.getValueAt(index, 0).toString();
+            LocalDate ngayLap = LocalDate.now();
+            Date date = Date.from(ngayLap.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+            String nl = txtNguoiLap.getText();
+            String tenkh = txtTenKH.getText();
+            String tenSan = tbDss.getValueAt(index, 1).toString();
+            String sdt = qltt.getSDT(tbDss.getValueAt(index, 0).toString());
+            Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
+            Double tienSan = qltt.giaSan(mds, cada);
+            Double thanhTien = Double.valueOf(txtTT.getText());
+            double giamGia = 0;
+
+            if (cb2.isSelected()) {
+                giamGia = 0.02 * thanhTien;
+            } else if (cb5.isSelected()) {
+                giamGia = 0.05 * thanhTien;
+            } else {
+                giamGia = 0;
+            }
+            Global gb = new Global();
+            gb.setBill(new Bill(mds, nl, date, tenkh, tenSan, tienSan, tienSan, giamGia, qltt.getListDv(mds)));
+
+            String idnv = gb.getIdnv();
+            String idkh = qltt.getIDKH(mds);
+
+            String tenKM = "";
+            if (cb2.isSelected()) {
+                tenKM = "Giảm 2% tổng bill >= 400000";
+            } else if (cb5.isSelected()) {
+                tenKM = "Giảm 5% tổng bill >= 600000";
+            } else {
+                tenKM = "";
+            }
+
+            HoaDon hd = new HoaDon(mds, idnv, idkh, 1, tenKM, idkh, tongTienDv + tienSan);
+            JOptionPane.showMessageDialog(this, qlhd.addHoaDon(hd));
+            FormHD form = new FormHD();
+            form.setVisible(true);
+        } else {
+            return;
+        }
+
+
     }//GEN-LAST:event_button4ActionPerformed
 
     private void txtNguoiLapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNguoiLapActionPerformed
@@ -534,8 +602,60 @@ public class FormThanhToan extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cb5ActionPerformed
 
+    private void btChoTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChoTTActionPerformed
+        // TODO add your handling code here:
+        int click = JOptionPane.showConfirmDialog(this, "Thêm Vào Hàng Chờ Thanh Toán ?");
+
+        if (click == JOptionPane.YES_OPTION) {
+
+            int cada = (int) tbDss.getValueAt(index, 3);
+            String mds = tbDss.getValueAt(index, 0).toString();
+            LocalDate ngayLap = LocalDate.now();
+            Date date = Date.from(ngayLap.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+            String nl = txtNguoiLap.getText();
+            String tenkh = txtTenKH.getText();
+            String tenSan = tbDss.getValueAt(index, 1).toString();
+            String sdt = qltt.getSDT(tbDss.getValueAt(index, 0).toString());
+            Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
+            Double tienSan = qltt.giaSan(mds, cada);
+            Double thanhTien = Double.valueOf(txtTT.getText());
+            double giamGia = 0;
+
+            if (cb2.isSelected()) {
+                giamGia = 0.02 * thanhTien;
+            } else if (cb5.isSelected()) {
+                giamGia = 0.05 * thanhTien;
+            } else {
+                giamGia = 0;
+            }
+            Global gb = new Global();
+            gb.setBill(new Bill(mds, nl, date, tenkh, tenSan, tienSan, tienSan, giamGia, qltt.getListDv(mds)));
+
+            String idnv = gb.getIdnv();
+            String idkh = qltt.getIDKH(mds);
+
+            String tenKM = "";
+            if (cb2.isSelected()) {
+                tenKM = "KM1";
+            } else if (cb5.isSelected()) {
+                tenKM = "KM2";
+            } else {
+                tenKM = null;
+            }
+
+            HoaDon hd = new HoaDon(mds, idnv, idkh, 0, tenKM, idkh, tongTienDv + tienSan);
+            JOptionPane.showMessageDialog(this, qlhd.addHoaDonCho(hd));
+          
+        } else {
+            return;
+        }
+
+    }//GEN-LAST:event_btChoTTActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private swing.controls.Button btChoTT;
     private swing.controls.Button button4;
     private javax.swing.JCheckBox cb2;
     private javax.swing.JCheckBox cb5;

@@ -10,6 +10,8 @@ import domainModel.TaiKhoan;
 import global.Global;
 import global.Uhelper;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import service.ServiceTaiKhoan;
 
@@ -39,7 +41,8 @@ public class FormThongTinCaNhan extends javax.swing.JFrame {
         txtTenNv.setText(nv.getHoTen());
         txtEmail.setText(nv.getEmail());
         txtSdt.setText(nv.getSdt());
-        txtNgaySinh.setText(nv.getNgaySinh().toString());
+        DateFormat oldFormat = new SimpleDateFormat("dd-MM-yyyy");
+        txtNgaySinh.setText(oldFormat.format(nv.getNgaySinh()).toString());
         txtDiaChi.setText(nv.getDiaChi());
         txtCmt.setText(nv.getCmt());
         txtChucVu.setText(nv.getIdCV());
@@ -49,7 +52,8 @@ public class FormThongTinCaNhan extends javax.swing.JFrame {
             rbNu.setSelected(true);
         }
         txtUser.setText(user);
-        txtUser.setEnabled(false);
+
+        disableViewData();
     }
 
     boolean validateForm() {
@@ -64,6 +68,18 @@ public class FormThongTinCaNhan extends javax.swing.JFrame {
             return false;
         }
         return true;
+    }
+
+    void disableViewData() {
+        txtMaNv.setEnabled(false);
+        txtTenNv.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtSdt.setEnabled(false);
+        txtNgaySinh.setEnabled(false);
+        txtCmt.setEnabled(false);
+        txtDiaChi.setEnabled(false);
+        txtChucVu.setEnabled(false);
+        txtUser.setEnabled(false);
     }
 
     /**

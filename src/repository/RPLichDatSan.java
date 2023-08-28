@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
  */
 public class RPLichDatSan {
 
-    RPKhachHang repoKH = new RPKhachHang();
+     RPKhachHang repoKH = new RPKhachHang();
     RPTaiKhoan repoTK = new RPTaiKhoan();
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -33,11 +33,11 @@ public class RPLichDatSan {
 //                + " a.SDT , b.ID_CaDa, CONVERT(varchar,ngayDat,103) as ngayDat,d.Ten as tenNV, b.TienDatCoc,b.TrangThai "
 //                + " FROM dbo.KhachHang a right JOIN dbo.LichDat_SanBong b ON b.ID_KH = a.ID "
 //                + " LEFT JOIN dbo.SanBong c ON c.ID = b.ID_SB left JOIN dbo.NhanVien d ON  d.ID = b.ID_NV";
-        String sql = "SELECT b.Ma, c.ten as tenSan, c.LoaiSan , a.ten as tenKH, "
-                + " a.SDT , b.ID_CaDa, CONVERT(varchar,ngayDat,103) as ngayDat,d.Ten as tenNV, b.TienDatCoc,b.TrangThai "
-                + " FROM dbo.KhachHang a right JOIN dbo.LichDat_SanBong b ON b.ID_KH = a.ID "
-                + " LEFT JOIN dbo.SanBong c ON c.ID = b.ID_SB left JOIN dbo.NhanVien d ON  d.ID = b.ID_NV"
-                + " where b.NgayDat =convert(nvarchar(50),GETDATE()) or  b.NgayDat > convert(nvarchar(50),GETDATE()) ";
+        String sql = "SELECT b.Ma, c.ten as tenSan, c.LoaiSan , a.ten as tenKH, \n"
+                + "                 a.SDT , b.ID_CaDa, CONVERT(varchar,ngayDa,103) as ngayDa,d.Ten as tenNV, b.TienDatCoc,b.TrangThai \n"
+                + "                FROM dbo.KhachHang a right JOIN dbo.LichDat_SanBong b ON b.ID_KH = a.ID \n"
+                + "                LEFT JOIN dbo.SanBong c ON c.ID = b.ID_SB left JOIN dbo.NhanVien d ON  d.ID = b.ID_NV JOIN caDa on caDa.id = b.ID_CaDa\n"
+                + "                where b.NgayDa = CONVERT(DATE, GETDATE()) and  CONVERT(TIME, GETDATE()) < caDa.GioMuonTT or b.NgayDa > GETDATE()";
         try (Connection con = DbConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
             ResultSet rs = ps.executeQuery();
@@ -53,7 +53,7 @@ public class RPLichDatSan {
                 lsd.setSdt(rs.getString("sdt"));
                 lsd.setCa(rs.getInt("ID_CaDa"));
 
-                java.util.Date date = format.parse(rs.getString("ngayDat"));
+                java.util.Date date = format.parse(rs.getString("ngayDa"));
                 lsd.setNgay(new java.util.Date(date.getTime()));
 
                 lsd.setTenNv(rs.getString("tenNV"));
@@ -66,6 +66,7 @@ public class RPLichDatSan {
             e.printStackTrace();
             return null;
         }
+
         return lst;
     }
 
@@ -103,7 +104,7 @@ public class RPLichDatSan {
         List<LichDatSanCT> lst = new ArrayList<>();
 
         String sql = "	SELECT b.Ma, c.ten as tenSan, c.LoaiSan , a.ten as tenKH, a.SDT , b.id_caDa,"
-                + " CONVERT(varchar,ngayDat,103) as ngayDat,d.Ten as tenNV, b.TienDatCoc,b.TrangThai  FROM dbo.KhachHang "
+                + " CONVERT(varchar,ngayDa,103) as ngayDa,d.Ten as tenNV, b.TienDatCoc,b.TrangThai  FROM dbo.KhachHang "
                 + " a RIGHT JOIN dbo.LichDat_SanBong b ON b.ID_KH = a.ID LEFT JOIN dbo.SanBong c ON c.ID = b.ID_SB "
                 + " left JOIN dbo.NhanVien d ON  d.ID = b.ID_NV where b.ma = ? ";
         try (Connection con = DbConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -118,7 +119,7 @@ public class RPLichDatSan {
                 lsd.setTenKh(rs.getString("tenKH"));
                 lsd.setSdt(rs.getString("sdt"));
                 lsd.setCa(rs.getInt("id_caDa"));
-                java.util.Date date2 = format.parse(rs.getString("ngayDat"));
+                java.util.Date date2 = format.parse(rs.getString("ngayDa"));
                 lsd.setNgay(new java.util.Date(date2.getTime()));
                 lsd.setTenNv(rs.getString("tenNV"));
                 lsd.setTienDatCoc(Double.parseDouble(String.valueOf(rs.getObject("TienDatCoc"))));
@@ -135,16 +136,22 @@ public class RPLichDatSan {
 
     public List<LichDatSanCT> getListSan(String user, Date date) {
         ArrayList<LichDatSanCT> lst = new ArrayList<>();
-        String sql = "	SELECT b.Ma, c.ten as tenSan, c.LoaiSan , a.ten as tenKH, a.SDT , b.id_caDa,"
-                + " CONVERT(varchar,ngayDat,103) as ngayDat,d.Ten as tenNV, b.TienDatCoc,b.TrangThai  FROM dbo.KhachHang "
-                + " a RIGHT JOIN dbo.LichDat_SanBong b ON b.ID_KH = a.ID LEFT JOIN dbo.SanBong c ON c.ID = b.ID_SB "
-                + " left JOIN dbo.NhanVien d ON  d.ID = b.ID_NV where c.ten = ? and b.ngayDat = ? ";
+        String sql = "	SELECT b.Ma, c.ten as tenSan, c.LoaiSan , a.ten as tenKH, a.SDT , b.id_caDa,\n"
+                + "                 CONVERT(varchar,ngayDa,103) as ngayDa,d.Ten as tenNV, b.TienDatCoc,b.TrangThai  FROM dbo.KhachHang \n"
+                + "                a RIGHT JOIN dbo.LichDat_SanBong b ON b.ID_KH = a.ID LEFT JOIN dbo.SanBong c ON c.ID = b.ID_SB \n"
+                + "               left JOIN dbo.NhanVien d ON  d.ID = b.ID_NV JOIN caDa on caDa.id = b.ID_CaDa where (c.ten = ? and b.NgayDa = ? and GETDATE() < ?) \n"
+                + "               or (c.ten = ? and b.NgayDa = ? and (CONVERT(DATE, GETDATE()) = ? and CONVERT(TIME, GETDATE()) < caDa.GioMuonTT))";
 
         try (Connection con = DbConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             format = new SimpleDateFormat("yyyy-MM-dd");
             ps.setObject(1, user);
             String date1 = format.format(date);
             ps.setObject(2, date1);
+            ps.setObject(3, date1);
+            ps.setObject(4, user);
+            ps.setObject(5, date1);
+            ps.setObject(6, date1);
+
             format = new SimpleDateFormat("dd/MM/yyyy");
 
             ResultSet rs = ps.executeQuery();
@@ -157,7 +164,7 @@ public class RPLichDatSan {
                 lsd.setTenKh(rs.getString("tenKH"));
                 lsd.setSdt(rs.getString("sdt"));
                 lsd.setCa(rs.getInt("id_caDa"));
-                java.util.Date date2 = format.parse(rs.getString("ngayDat"));
+                java.util.Date date2 = format.parse(rs.getString("ngayDa"));
                 lsd.setNgay(new java.util.Date(date2.getTime()));
                 lsd.setTenNv(rs.getString("tenNV"));
                 lsd.setTienDatCoc(Double.parseDouble(String.valueOf(rs.getObject("TienDatCoc"))));
@@ -226,7 +233,7 @@ public class RPLichDatSan {
         repoKH.addKhachHang(kh);
 
         String sql = "INSERT INTO LichDat_SanBong(Ma,ID_SB,ID_NV,ID_KH, "
-                + " ID_CaDa ,TienDatCoc,TrangThai,NgayDat) VALUES(?,?,?,?,?,?,?,?)";
+                + " ID_CaDa ,TienDatCoc,TrangThai,NgayDa) VALUES(?,?,?,?,?,?,?,?)";
         try (Connection con = DbConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, lds.getMaDatSan());
             ps.setObject(2, lds.getIdSb());
@@ -236,11 +243,10 @@ public class RPLichDatSan {
             ps.setObject(6, lds.getTienCoc());
             ps.setObject(7, 1);
 
-//            String date1 = format.format(lds.getNgayDat());
-            ps.setObject(8, new java.sql.Date(lds.getNgayDat().getTime()));
+//            String date1 = format.format(lds.getNgayDa());
+            ps.setObject(8, new java.sql.Date(lds.getNgayDa().getTime()));
 
             int result = ps.executeUpdate();
-
             return result > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -251,7 +257,7 @@ public class RPLichDatSan {
     public boolean nhanSan(String id, LichDatSanBong lsd) {
         String sql = "UPDATE LichDat_SanBong SET TrangThai = 2 WHERE CONVERT(DATE, ?) = CONVERT(DATE, GETDATE()) AND Ma = ? ";
         try (Connection con = DbConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setObject(1, new java.sql.Date(lsd.getNgayDat().getTime()));
+            ps.setObject(1, new java.sql.Date(lsd.getNgayDa().getTime()));
             ps.setObject(2, id);
             int result = ps.executeUpdate();
             return result > 0;
@@ -272,5 +278,4 @@ public class RPLichDatSan {
         }
         return false;
     }
-
 }

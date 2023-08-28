@@ -4,6 +4,7 @@
  */
 package view;
 
+import dbConnection.DbConnection;
 import domainModel.KhachHang;
 import domainModel.LichDatSanBong;
 import domainModel.LichDatSanCT;
@@ -58,7 +59,7 @@ public class FormDatSan extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        
+
         txtSearch.addEventOptionSelected(new SearchOptinEvent() {
             @Override
             public void optionSelected(SearchOption so, int i) {
@@ -115,6 +116,25 @@ public class FormDatSan extends javax.swing.JPanel {
                 txtTienCoc.getText().isEmpty() ? 0 : Double.parseDouble(txtTienCoc.getText()),
                 cboCaDa.getSelectedIndex() + 1,
                 txtDate.getDate());
+    }
+
+    public boolean checkTrung(int cd, Date nd, String ts) {
+        java.sql.Connection con = DbConnection.getConnection();
+        String sql = "select * from LichDat_SanBong lds join SanBong sb on lds.ID_SB=sb.ID where  lds.ID_CaDa = ? and lds.NgayDat = ? and sb.Ten = ?";
+        try {
+            java.sql.PreparedStatement pts = con.prepareStatement(sql);
+            pts.setObject(1, cd);
+            pts.setObject(2, new java.sql.Date(nd.getTime()));
+            pts.setObject(3, ts);
+            java.sql.ResultSet rs = pts.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Ca bạn chọn đã được đặt");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     boolean check() {
@@ -257,7 +277,6 @@ public class FormDatSan extends javax.swing.JPanel {
         btnDatSan = new swing.controls.ButtonGradient();
         btnHuySan = new swing.controls.ButtonGradient();
         btnNhanSan = new swing.controls.ButtonGradient();
-        btnNhanSan1 = new swing.controls.ButtonGradient();
         panelSeth3 = new swing.component.PanelSeth();
         jLabel2 = new javax.swing.JLabel();
         txtHotenKh = new swing.controls.TextField();
@@ -543,6 +562,9 @@ public class FormDatSan extends javax.swing.JPanel {
                         .addComponent(lbSan11C)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
+
+        panelSeth4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {myButton1, myButton2, myButton3, myButton4, myButton5, myButton6, myButton7, myButton8, myButton9});
+
         panelSeth4Layout.setVerticalGroup(
             panelSeth4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeth4Layout.createSequentialGroup()
@@ -601,6 +623,8 @@ public class FormDatSan extends javax.swing.JPanel {
                                 .addGap(17, 17, 17))))))
         );
 
+        panelSeth4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {myButton1, myButton2, myButton3, myButton4, myButton5, myButton6, myButton7, myButton8, myButton9});
+
         panelSeth1.setColor1(new java.awt.Color(241, 208, 62));
         panelSeth1.setColor2(new java.awt.Color(211, 184, 61));
 
@@ -634,16 +658,6 @@ public class FormDatSan extends javax.swing.JPanel {
             }
         });
 
-        btnNhanSan1.setText("Trả Sân");
-        btnNhanSan1.setColor1(new java.awt.Color(57, 106, 252));
-        btnNhanSan1.setColor2(new java.awt.Color(36, 36, 62));
-        btnNhanSan1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnNhanSan1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNhanSan1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelSeth1Layout = new javax.swing.GroupLayout(panelSeth1);
         panelSeth1.setLayout(panelSeth1Layout);
         panelSeth1Layout.setHorizontalGroup(
@@ -654,8 +668,7 @@ public class FormDatSan extends javax.swing.JPanel {
                     .addComponent(btnDatSan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnNhanSan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHuySan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNhanSan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnHuySan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -664,15 +677,13 @@ public class FormDatSan extends javax.swing.JPanel {
         panelSeth1Layout.setVerticalGroup(
             panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeth1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addComponent(btnDatSan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(btnNhanSan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnNhanSan1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(btnHuySan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         panelSeth1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDatSan, btnNhanSan});
@@ -839,12 +850,11 @@ public class FormDatSan extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelSeth4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelSeth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(panelSeth3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panelSeth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelSeth3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -914,11 +924,6 @@ public class FormDatSan extends javax.swing.JPanel {
     private void txtMaDsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaDsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaDsActionPerformed
-
-    private void btnNhanSan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanSan1ActionPerformed
-        // TODO add your handling code here
-
-    }//GEN-LAST:event_btnNhanSan1ActionPerformed
 
     private void lbSan5AMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan5AMouseClicked
 
@@ -1081,7 +1086,6 @@ public class FormDatSan extends javax.swing.JPanel {
     private swing.controls.ButtonGradient btnDatSan;
     private swing.controls.ButtonGradient btnHuySan;
     private swing.controls.ButtonGradient btnNhanSan;
-    private swing.controls.ButtonGradient btnNhanSan1;
     private swing.controls.Button button1;
     private swing.controls.Combobox cboCaDa;
     private javax.swing.JLabel jLabel1;

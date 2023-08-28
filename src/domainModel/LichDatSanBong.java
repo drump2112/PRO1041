@@ -20,6 +20,7 @@ public class LichDatSanBong {
     private Double tienCoc;
     private int caDa;
     private Date ngayDat;
+    private Date ngayDa;
 
     public LichDatSanBong() {
     }
@@ -92,6 +93,14 @@ public class LichDatSanBong {
 
     public void setNgayDat(Date ngayDat) {
         this.ngayDat = ngayDat;
+    }
+
+    public Date getNgayDa() {
+        return ngayDa;
+    }
+
+    public void setNgayDa(Date ngayDa) {
+        this.ngayDa = ngayDa;
     }
 
 }

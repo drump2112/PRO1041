@@ -104,7 +104,7 @@ public class FormService extends javax.swing.JPanel {
             model1.addRow(new Object[]{
                 gioHang.getTenDv(),
                 gioHang.getSoLuong(),
-               gioHang.getSoLuong() * gioHang.getGiaTien()
+                gioHang.getSoLuong() * gioHang.getGiaTien()
             });
         }
     }
@@ -126,67 +126,59 @@ public class FormService extends javax.swing.JPanel {
         jlWater = new javax.swing.JLabel();
         jsNcLoc = new javax.swing.JSpinner();
         jlWater1 = new javax.swing.JLabel();
-        buttonOutLine1 = new swing.controls.ButtonOutLine();
-        buttonOutLine3 = new swing.controls.ButtonOutLine();
+        btnWater = new swing.controls.ButtonOutLine();
         panelBorder2 = new swing.swing.PanelBorder();
         jLabel3 = new javax.swing.JLabel();
         bimbim = new javax.swing.JLabel();
         jsSnack = new javax.swing.JSpinner();
         jlWater3 = new javax.swing.JLabel();
-        buttonOutLine2 = new swing.controls.ButtonOutLine();
-        buttonOutLine4 = new swing.controls.ButtonOutLine();
+        btnSack = new swing.controls.ButtonOutLine();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         panelBorder3 = new swing.swing.PanelBorder();
         jLabel4 = new javax.swing.JLabel();
         bong = new javax.swing.JLabel();
         jsBong = new javax.swing.JSpinner();
         jlWater5 = new javax.swing.JLabel();
-        buttonOutLine5 = new swing.controls.ButtonOutLine();
-        buttonOutLine6 = new swing.controls.ButtonOutLine();
+        btnBall = new swing.controls.ButtonOutLine();
         panelBorder4 = new swing.swing.PanelBorder();
         jLabel5 = new javax.swing.JLabel();
         coCa = new javax.swing.JLabel();
         jsCoca = new javax.swing.JSpinner();
         jlWater7 = new javax.swing.JLabel();
-        buttonOutLine7 = new swing.controls.ButtonOutLine();
-        buttonOutLine8 = new swing.controls.ButtonOutLine();
+        btnCoca = new swing.controls.ButtonOutLine();
         jLayeredPane4 = new javax.swing.JLayeredPane();
         panelBorder5 = new swing.swing.PanelBorder();
         jLabel6 = new javax.swing.JLabel();
         quanAo = new javax.swing.JLabel();
         jsQA = new javax.swing.JSpinner();
         jlWater9 = new javax.swing.JLabel();
-        buttonOutLine9 = new swing.controls.ButtonOutLine();
-        buttonOutLine10 = new swing.controls.ButtonOutLine();
+        btTee = new swing.controls.ButtonOutLine();
         panelBorder6 = new swing.swing.PanelBorder();
         jLabel7 = new javax.swing.JLabel();
         giay = new javax.swing.JLabel();
         jsShose = new javax.swing.JSpinner();
         aaaa = new javax.swing.JLabel();
-        buttonOutLine11 = new swing.controls.ButtonOutLine();
-        buttonOutLine12 = new swing.controls.ButtonOutLine();
+        btShoes = new swing.controls.ButtonOutLine();
         jLayeredPane5 = new javax.swing.JLayeredPane();
         panelBorder7 = new swing.swing.PanelBorder();
         jLabel8 = new javax.swing.JLabel();
         xucXich = new javax.swing.JLabel();
         jsXx = new javax.swing.JSpinner();
         jlWater6 = new javax.swing.JLabel();
-        buttonOutLine13 = new swing.controls.ButtonOutLine();
-        buttonOutLine14 = new swing.controls.ButtonOutLine();
+        btnXX = new swing.controls.ButtonOutLine();
         panelBorder8 = new swing.swing.PanelBorder();
         jLabel9 = new javax.swing.JLabel();
         revive = new javax.swing.JLabel();
         jsRv = new javax.swing.JSpinner();
         jlWater8 = new javax.swing.JLabel();
-        buttonOutLine15 = new swing.controls.ButtonOutLine();
-        buttonOutLine16 = new swing.controls.ButtonOutLine();
+        btnRV = new swing.controls.ButtonOutLine();
         panelSeth3 = new swing.component.PanelSeth();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbListDv = new swing.swing.Table();
         jLabel13 = new javax.swing.JLabel();
         panelSeth1 = new swing.component.PanelSeth();
         btnThemDV = new swing.controls.ButtonGradient();
-        btnHuyDV = new swing.controls.ButtonGradient();
+        btnClear = new swing.controls.ButtonGradient();
         btnThemDV1 = new swing.controls.ButtonGradient();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDss = new swing.swing.Table();
@@ -215,52 +207,47 @@ public class FormService extends javax.swing.JPanel {
         jlWater1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jlWater1.setText("Nước Lọc");
 
-        buttonOutLine1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine1.addActionListener(new java.awt.event.ActionListener() {
+        btnWater.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btnWater.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine1ActionPerformed(evt);
+                btnWaterActionPerformed(evt);
             }
         });
-
-        buttonOutLine3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jlWater1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnWater, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jsNcLoc, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                            .addComponent(jlWater, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(buttonOutLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonOutLine3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(14, 14, 14)
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlWater1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelBorder1Layout.createSequentialGroup()
+                                    .addGap(5, 5, 5)
+                                    .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jsNcLoc, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                        .addComponent(jlWater, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jlWater1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlWater, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsNcLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnWater, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -281,14 +268,12 @@ public class FormService extends javax.swing.JPanel {
         jlWater3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jlWater3.setText("Bim Bim");
 
-        buttonOutLine2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine2.addActionListener(new java.awt.event.ActionListener() {
+        btnSack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btnSack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine2ActionPerformed(evt);
+                btnSackActionPerformed(evt);
             }
         });
-
-        buttonOutLine4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
         panelBorder2.setLayout(panelBorder2Layout);
@@ -296,22 +281,19 @@ public class FormService extends javax.swing.JPanel {
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelBorder2Layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addComponent(buttonOutLine2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(buttonOutLine4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder2Layout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(bimbim, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                    .addComponent(jsSnack))
-                                .addComponent(jlWater3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelBorder2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(bimbim, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                .addComponent(jsSnack))
+                            .addComponent(jlWater3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelBorder2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorder2Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnSack, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         panelBorder2Layout.setVerticalGroup(
@@ -326,9 +308,7 @@ public class FormService extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsSnack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSack, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -351,14 +331,12 @@ public class FormService extends javax.swing.JPanel {
         jlWater5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jlWater5.setText("Bóng");
 
-        buttonOutLine5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine5.addActionListener(new java.awt.event.ActionListener() {
+        btnBall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btnBall.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine5ActionPerformed(evt);
+                btnBallActionPerformed(evt);
             }
         });
-
-        buttonOutLine6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder3Layout = new javax.swing.GroupLayout(panelBorder3);
         panelBorder3.setLayout(panelBorder3Layout);
@@ -368,12 +346,7 @@ public class FormService extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jsBong, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(bong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(buttonOutLine5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonOutLine6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(panelBorder3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -382,6 +355,10 @@ public class FormService extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlWater5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelBorder3Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(btnBall, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder3Layout.setVerticalGroup(
@@ -396,9 +373,7 @@ public class FormService extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsBong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnBall, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -420,14 +395,12 @@ public class FormService extends javax.swing.JPanel {
         jlWater7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jlWater7.setText("Coca");
 
-        buttonOutLine7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine7.addActionListener(new java.awt.event.ActionListener() {
+        btnCoca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btnCoca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine7ActionPerformed(evt);
+                btnCocaActionPerformed(evt);
             }
         });
-
-        buttonOutLine8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder4Layout = new javax.swing.GroupLayout(panelBorder4);
         panelBorder4.setLayout(panelBorder4Layout);
@@ -439,18 +412,16 @@ public class FormService extends javax.swing.JPanel {
                         .addGap(19, 19, 19)
                         .addGroup(panelBorder4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jsCoca, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                            .addComponent(coCa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder4Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(buttonOutLine7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonOutLine8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(coCa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelBorder4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder4Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jlWater7)))
+                        .addComponent(jlWater7))
+                    .addGroup(panelBorder4Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(btnCoca, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         panelBorder4Layout.setVerticalGroup(
@@ -465,9 +436,7 @@ public class FormService extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsCoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnCoca, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -490,36 +459,33 @@ public class FormService extends javax.swing.JPanel {
         jlWater9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jlWater9.setText("Quần Áo");
 
-        buttonOutLine9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine9.addActionListener(new java.awt.event.ActionListener() {
+        btTee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btTee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine9ActionPerformed(evt);
+                btTeeActionPerformed(evt);
             }
         });
-
-        buttonOutLine10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder5Layout = new javax.swing.GroupLayout(panelBorder5);
         panelBorder5.setLayout(panelBorder5Layout);
         panelBorder5Layout.setHorizontalGroup(
             panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder5Layout.createSequentialGroup()
-                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder5Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jlWater9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder5Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jlWater9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelBorder5Layout.createSequentialGroup()
+                            .addGap(8, 8, 8)
+                            .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jsQA, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                    .addComponent(quanAo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(panelBorder5Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jsQA, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                .addComponent(quanAo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder5Layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(buttonOutLine9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(buttonOutLine10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(45, 45, 45)
+                        .addComponent(btTee, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         panelBorder5Layout.setVerticalGroup(
@@ -534,9 +500,7 @@ public class FormService extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsQA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btTee, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -557,34 +521,32 @@ public class FormService extends javax.swing.JPanel {
         aaaa.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         aaaa.setText("Giày");
 
-        buttonOutLine11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine11.addActionListener(new java.awt.event.ActionListener() {
+        btShoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btShoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine11ActionPerformed(evt);
+                btShoesActionPerformed(evt);
             }
         });
-
-        buttonOutLine12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder6Layout = new javax.swing.GroupLayout(panelBorder6);
         panelBorder6.setLayout(panelBorder6Layout);
         panelBorder6Layout.setHorizontalGroup(
             panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder6Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jsShose, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                        .addComponent(giay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder6Layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(buttonOutLine11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(buttonOutLine12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder6Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(aaaa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelBorder6Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jsShose, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                .addComponent(giay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder6Layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(aaaa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(panelBorder6Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(btShoes, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         panelBorder6Layout.setVerticalGroup(
@@ -599,9 +561,7 @@ public class FormService extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsShose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine11, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine12, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btShoes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -624,14 +584,12 @@ public class FormService extends javax.swing.JPanel {
         jlWater6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jlWater6.setText("Xúc Xích");
 
-        buttonOutLine13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine13.addActionListener(new java.awt.event.ActionListener() {
+        btnXX.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btnXX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine13ActionPerformed(evt);
+                btnXXActionPerformed(evt);
             }
         });
-
-        buttonOutLine14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder7Layout = new javax.swing.GroupLayout(panelBorder7);
         panelBorder7.setLayout(panelBorder7Layout);
@@ -641,12 +599,7 @@ public class FormService extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(panelBorder7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jsXx, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(xucXich, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder7Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(buttonOutLine13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonOutLine14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(xucXich, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(panelBorder7Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -654,22 +607,24 @@ public class FormService extends javax.swing.JPanel {
                     .addComponent(jlWater6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelBorder7Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(btnXX, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder7Layout.setVerticalGroup(
             panelBorder7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder7Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlWater6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(xucXich, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsXx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine13, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine14, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnXX, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -690,14 +645,12 @@ public class FormService extends javax.swing.JPanel {
         jlWater8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jlWater8.setText("Revive");
 
-        buttonOutLine15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
-        buttonOutLine15.addActionListener(new java.awt.event.ActionListener() {
+        btnRV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-plus-20.png"))); // NOI18N
+        btnRV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOutLine15ActionPerformed(evt);
+                btnRVActionPerformed(evt);
             }
         });
-
-        buttonOutLine16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-minus-20.png"))); // NOI18N
 
         javax.swing.GroupLayout panelBorder8Layout = new javax.swing.GroupLayout(panelBorder8);
         panelBorder8.setLayout(panelBorder8Layout);
@@ -709,18 +662,16 @@ public class FormService extends javax.swing.JPanel {
                         .addGap(19, 19, 19)
                         .addGroup(panelBorder8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jsRv, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                            .addComponent(revive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder8Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(buttonOutLine15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonOutLine16, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(revive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelBorder8Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jlWater8))
                     .addGroup(panelBorder8Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorder8Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(btnRV, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         panelBorder8Layout.setVerticalGroup(
@@ -735,9 +686,7 @@ public class FormService extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsRv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBorder8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOutLine15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOutLine16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnRV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -803,8 +752,8 @@ public class FormService extends javax.swing.JPanel {
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelSeth3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         panelSeth3Layout.setVerticalGroup(
             panelSeth3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -829,17 +778,17 @@ public class FormService extends javax.swing.JPanel {
             }
         });
 
-        btnHuyDV.setText("Hủy");
-        btnHuyDV.setColor1(new java.awt.Color(57, 106, 252));
-        btnHuyDV.setColor2(new java.awt.Color(36, 36, 62));
-        btnHuyDV.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnHuyDV.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.setColor1(new java.awt.Color(57, 106, 252));
+        btnClear.setColor2(new java.awt.Color(36, 36, 62));
+        btnClear.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyDVActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
-        btnThemDV1.setText("Sửa");
+        btnThemDV1.setText("Xóa");
         btnThemDV1.setColor1(new java.awt.Color(57, 106, 252));
         btnThemDV1.setColor2(new java.awt.Color(36, 36, 62));
         btnThemDV1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -856,7 +805,7 @@ public class FormService extends javax.swing.JPanel {
             .addGroup(panelSeth1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelSeth1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnHuyDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThemDV, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                     .addComponent(btnThemDV1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -868,9 +817,9 @@ public class FormService extends javax.swing.JPanel {
                 .addComponent(btnThemDV, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(btnThemDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(btnHuyDV, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(27, 27, 27)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         tbDss.setModel(new javax.swing.table.DefaultTableModel(
@@ -937,10 +886,12 @@ public class FormService extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnThemDVActionPerformed
 
-    private void btnHuyDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDVActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_btnHuyDVActionPerformed
+        listOrder.removeAll(listOrder);
+
+    }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnThemDV1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDV1ActionPerformed
         // TODO add your handling code here:
@@ -974,89 +925,114 @@ public class FormService extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jsRvKeyPressed
 
-    private void buttonOutLine15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine15ActionPerformed
+    private void btnRVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRVActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString())));
+            if ((int) jsRv.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString())));
+            }
         }
-    }//GEN-LAST:event_buttonOutLine15ActionPerformed
+    }//GEN-LAST:event_btnRVActionPerformed
 
-    private void buttonOutLine1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine1ActionPerformed
+    private void btnWaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWaterActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MDV1", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsNcLoc.getValue().toString())));
-
+            if ((int) jsNcLoc.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MDV1", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsNcLoc.getValue().toString())));
+            }
         }
-    }//GEN-LAST:event_buttonOutLine1ActionPerformed
+    }//GEN-LAST:event_btnWaterActionPerformed
 
-    private void buttonOutLine2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine2ActionPerformed
+    private void btnSackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSackActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MDV2", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsSnack.getValue().toString())));
-
+            if ((int) jsSnack.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MDV2", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsSnack.getValue().toString())));
+            }
         }
-    }//GEN-LAST:event_buttonOutLine2ActionPerformed
+    }//GEN-LAST:event_btnSackActionPerformed
 
-    private void buttonOutLine9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine9ActionPerformed
+    private void btTeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTeeActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MDV3", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsQA.getValue().toString())));
-
+            if ((int) jsQA.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MDV3", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsQA.getValue().toString())));
+            }
         }
 
-    }//GEN-LAST:event_buttonOutLine9ActionPerformed
+    }//GEN-LAST:event_btTeeActionPerformed
 
-    private void buttonOutLine11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine11ActionPerformed
+    private void btShoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btShoesActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MDV4", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsShose.getValue().toString())));
-
+            if ((int) jsShose.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MDV4", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsShose.getValue().toString())));
+            }
         }
 
-    }//GEN-LAST:event_buttonOutLine11ActionPerformed
+    }//GEN-LAST:event_btShoesActionPerformed
 
-    private void buttonOutLine13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine13ActionPerformed
+    private void btnXXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXXActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString())));
+            if ((int) jsXx.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString())));
+            }
         }
-        listOrder.add(new GioHang("MD5", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsXx.getValue().toString())));
 
-    }//GEN-LAST:event_buttonOutLine13ActionPerformed
+    }//GEN-LAST:event_btnXXActionPerformed
 
-    private void buttonOutLine5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine5ActionPerformed
+    private void btnBallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBallActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MDV8 ", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsBong.getValue().toString())));
-
+            if ((int) jsBong.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MDV8 ", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsBong.getValue().toString())));
+            }
         }
 
-    }//GEN-LAST:event_buttonOutLine5ActionPerformed
+    }//GEN-LAST:event_btnBallActionPerformed
 
-    private void buttonOutLine7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutLine7ActionPerformed
+    private void btnCocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCocaActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
-            listOrder.add(new GioHang("MDV7", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsCoca.getValue().toString())));
-
+            if ((int) jsCoca.getValue() == 0) {
+                return;
+            } else {
+                listOrder.add(new GioHang("MDV7", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsCoca.getValue().toString())));
+            }
         }
 
-    }//GEN-LAST:event_buttonOutLine7ActionPerformed
+    }//GEN-LAST:event_btnCocaActionPerformed
 
     private void tbDssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDssMouseClicked
         // TODO add your handling code here:
@@ -1072,25 +1048,17 @@ public class FormService extends javax.swing.JPanel {
     private javax.swing.JLabel aaaa;
     private javax.swing.JLabel bimbim;
     private javax.swing.JLabel bong;
-    private swing.controls.ButtonGradient btnHuyDV;
+    private swing.controls.ButtonOutLine btShoes;
+    private swing.controls.ButtonOutLine btTee;
+    private swing.controls.ButtonOutLine btnBall;
+    private swing.controls.ButtonGradient btnClear;
+    private swing.controls.ButtonOutLine btnCoca;
+    private swing.controls.ButtonOutLine btnRV;
+    private swing.controls.ButtonOutLine btnSack;
     private swing.controls.ButtonGradient btnThemDV;
     private swing.controls.ButtonGradient btnThemDV1;
-    private swing.controls.ButtonOutLine buttonOutLine1;
-    private swing.controls.ButtonOutLine buttonOutLine10;
-    private swing.controls.ButtonOutLine buttonOutLine11;
-    private swing.controls.ButtonOutLine buttonOutLine12;
-    private swing.controls.ButtonOutLine buttonOutLine13;
-    private swing.controls.ButtonOutLine buttonOutLine14;
-    private swing.controls.ButtonOutLine buttonOutLine15;
-    private swing.controls.ButtonOutLine buttonOutLine16;
-    private swing.controls.ButtonOutLine buttonOutLine2;
-    private swing.controls.ButtonOutLine buttonOutLine3;
-    private swing.controls.ButtonOutLine buttonOutLine4;
-    private swing.controls.ButtonOutLine buttonOutLine5;
-    private swing.controls.ButtonOutLine buttonOutLine6;
-    private swing.controls.ButtonOutLine buttonOutLine7;
-    private swing.controls.ButtonOutLine buttonOutLine8;
-    private swing.controls.ButtonOutLine buttonOutLine9;
+    private swing.controls.ButtonOutLine btnWater;
+    private swing.controls.ButtonOutLine btnXX;
     private javax.swing.JLabel coCa;
     private javax.swing.JLabel giay;
     private javax.swing.JLabel jLabel13;
