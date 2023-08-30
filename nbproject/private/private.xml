@@ -20,21 +20,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceTaiKhoan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormService.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceThanhToan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceGiaoCa.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPHoaDon.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/domainModel/HoaDonCho.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormHoaDonCho.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPTaiKhoan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormThanhToan.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/domainModel/HoaDon.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceLichDatSan.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/swing/chart/ModelPieChart.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormThongKe.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/NewJFrame.java</file>
             <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceHoaDon.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceGioHang.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/repository/RPGioHang.java</file>
-            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormAdmin.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormHoaDonCho.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/view/FormThanhToan.java</file>
+            <file>file:/D:/workspace/FPT/SOF2041/src/service/ServiceLichDatSan.java</file>
         </group>
     </open-files>
 </project-private>

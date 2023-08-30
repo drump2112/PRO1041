@@ -36,11 +36,20 @@ public class ServiceHoaDon {
             return "Thanh Toán Không Thành Công";
         }
     }
-     public String addHoaDonCho(HoaDon hd) {
+
+    public String addHoaDonCho(HoaDon hd) {
         if (RP.addHoaDonCho(hd)) {
             return "Thêm Vào Hàng Chờ Thành Công";
         } else {
             return "Thêm Vào Hàng Không Thành Công";
         }
+    }
+
+    public List<HoaDonCho> findByMds(String mds) {
+        return RP.findByMds(mds);
+    }
+
+    public List<HoaDonCho> findByName(String name) {
+        return RP.findByName(name);
     }
 }

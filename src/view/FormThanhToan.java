@@ -480,7 +480,7 @@ public class FormThanhToan extends javax.swing.JPanel {
             } else if (cb5.isSelected()) {
                 tenKM = "Giảm 5% tổng bill >= 600000";
             } else {
-                tenKM = "";
+                tenKM = null;
             }
 
             HoaDon hd = new HoaDon(mds, idnv, idkh, 1, tenKM, idkh, tongTienDv + tienSan);

@@ -97,4 +97,53 @@ public class RPHoaDon {
         return false;
     }
 
+    public List<HoaDonCho> findByMds(String mds) {
+        Connection c = DbConnection.getConnection();
+        List<HoaDonCho> list = new ArrayList<>();
+        String sql = "SELECT a.id ,a.Ma_LichDatSan AS mds,b.Ten, a.TongTien  FROM dbo.HoaDon a INNER JOIN  dbo.KhachHang b ON b.ID = a.ID_KH WHERE a.TrangThai = 0 AND a.Ma_LichDatSan = ? ";
+        try {
+
+            PreparedStatement pts = c.prepareStatement(sql);
+            pts.setObject(1, mds);
+            ResultSet rs = pts.executeQuery();
+            while (rs.next()) {
+                HoaDonCho hdc = new HoaDonCho();
+
+                hdc.setMa(rs.getString("id"));
+                hdc.setMds(rs.getString("mds"));
+                hdc.setTenKH(rs.getString("Ten"));
+                hdc.setTongTien(rs.getDouble("TongTien"));
+                list.add(hdc);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<HoaDonCho> findByName(String name) {
+        Connection c = DbConnection.getConnection();
+        List<HoaDonCho> list = new ArrayList<>();
+        String sql = "SELECT a.id ,a.Ma_LichDatSan AS mds,b.Ten, a.TongTien  FROM dbo.HoaDon a INNER JOIN  dbo.KhachHang b ON b.ID = a.ID_KH WHERE a.TrangThai = 0 AND b.Ten like N'%" + name + "%'";
+        try {
+
+            PreparedStatement pts = c.prepareStatement(sql);
+           
+            ResultSet rs = pts.executeQuery();
+            while (rs.next()) {
+                HoaDonCho hdc = new HoaDonCho();
+
+                hdc.setMa(rs.getString("id"));
+                hdc.setMds(rs.getString("mds"));
+                hdc.setTenKH(rs.getString("Ten"));
+                hdc.setTongTien(rs.getDouble("TongTien"));
+                list.add(hdc);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
