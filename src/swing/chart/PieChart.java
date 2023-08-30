@@ -91,7 +91,8 @@ public class PieChart extends JComponent {
         if (hoverIndex >= 0) {
             g2.setColor(models.get(hoverIndex).getColor());
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
-            g2.fill(createShape(hoverIndex, 0, borderHover));
+            g2.fill(createShape(hoverIndex, 0, 
+                    borderHover));
         }
         if (selectedIndex >= 0) {
             g2.setColor(models.get(selectedIndex).getColor());

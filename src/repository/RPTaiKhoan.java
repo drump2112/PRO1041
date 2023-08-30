@@ -34,7 +34,7 @@ public class RPTaiKhoan {
                 tk.setEmail(rs.getString("Email"));
                 tk.setMatKhau(rs.getString("MatKhau"));
                 tk.setIdcv(rs.getString("macv"));
-                tk.setId(rs.getString("ID_NV"));
+                tk.setIdnv(rs.getString("ID_NV"));
                 tk.setSdt(rs.getString("SDT"));
                 tk.setTenDangNhap(rs.getString("TenDangNhap"));
 

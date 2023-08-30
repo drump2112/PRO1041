@@ -16,6 +16,7 @@ public class TaiKhoan {
     private String email;
     private String sdt;
     private String idcv;
+   
 
     public TaiKhoan() {
     }
@@ -25,8 +26,8 @@ public class TaiKhoan {
         this.matKhau = matKhau;
     }
 
-    public TaiKhoan(String id, String tenDangNhap, String matKhau, String email, String sdt, String idcv) {
-        this.idnv = id;
+    public TaiKhoan(String idnv, String tenDangNhap, String matKhau, String email, String sdt, String idcv) {
+        this.idnv = idnv;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.email = email;
@@ -34,11 +35,11 @@ public class TaiKhoan {
         this.idcv = idcv;
     }
 
-    public String getId() {
+    public String getIdnv() {
         return idnv;
     }
 
-    public void setId(String id) {
+    public void setIdnv(String id) {
         this.idnv = id;
     }
 

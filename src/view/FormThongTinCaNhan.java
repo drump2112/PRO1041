@@ -46,7 +46,7 @@ public class FormThongTinCaNhan extends javax.swing.JFrame {
         txtDiaChi.setText(nv.getDiaChi());
         txtCmt.setText(nv.getCmt());
         txtChucVu.setText(nv.getIdCV());
-        if (nv.getGioiTinh().equals("Nam")) {
+        if (nv.getGioiTinh().equals("NAM")) {
             rbNam.setSelected(true);
         } else {
             rbNu.setSelected(true);
@@ -80,6 +80,8 @@ public class FormThongTinCaNhan extends javax.swing.JFrame {
         txtDiaChi.setEnabled(false);
         txtChucVu.setEnabled(false);
         txtUser.setEnabled(false);
+        rbNam.setEnabled(false);
+        rbNu.setEnabled(false);
     }
 
     /**
@@ -570,16 +572,19 @@ public class FormThongTinCaNhan extends javax.swing.JFrame {
 
     private void kButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton1ActionPerformed
         if (validateForm()) {
-            if (sv.DangNhap(txtUser.getText(), txtOldPass.getPassword().toString()).equals("Fail")) {
-                JOptionPane.showMessageDialog(this, "Mật Khẩu Không Chính Xác");
+            String user = txtUser.getText();
+            String oldPass = String.valueOf(txtOldPass.getPassword());
+            String newPass = String.valueOf(txtMkMoi.getPassword());
+            String reTPass = String.valueOf(txtNhapLaiMK.getPassword());
+            if (sv.DangNhap(user, oldPass).equalsIgnoreCase("Fail")) {
+                JOptionPane.showMessageDialog(this, "Mật Khẩu Cũ Không Chính Xác");
                 return;
-            } else if (!(txtMkMoi.getPassword().toString().equalsIgnoreCase(txtNhapLaiMK.getPassword().toString()))) {
+            } else if (!newPass.equals(reTPass)) {
                 JOptionPane.showMessageDialog(this, "Nhập Lại Không Trùng Nhau");
                 return;
             } else {
-                String user1 = txtUser.getText();
-                String pass = String.valueOf(txtMkMoi.getPassword().toString());
-                JOptionPane.showMessageDialog(this, sv.doiMatKhau(new TaiKhoan(user1, pass)));
+
+                JOptionPane.showMessageDialog(this, sv.doiMatKhau(new TaiKhoan(user, newPass)));
             }
         }
     }//GEN-LAST:event_kButton1ActionPerformed
