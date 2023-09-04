@@ -25,7 +25,7 @@ public class RPGiaoCa {
     private PreparedStatement pre;
     private String sql;
 
-    public GiaoCaCT getGiaoCaTT(LocalDateTime gv, LocalDateTime gr) {
+     public GiaoCaCT getGiaoCaTT(LocalDateTime gv, LocalDateTime gr) {
 
         sql = " select sum(TongTien) TT from HoaDon hd \n"
                 + "join LichDat_SanBong lds on hd.Ma_LichDatSan = lds.Ma \n"
@@ -37,8 +37,8 @@ public class RPGiaoCa {
             String gioVao = gv.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String gioRa = gr.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-            pre.setObject(1, "2023-08-08 00:00:00");
-            pre.setObject(2, "2023-09-09 00:00:00");
+            pre.setObject(1, gioVao);
+            pre.setObject(2, gioRa);
             ResultSet re = pre.executeQuery();
             GiaoCaCT giaoCaCT = new GiaoCaCT();
             while (re.next()) {
@@ -58,8 +58,8 @@ public class RPGiaoCa {
             pre = con.prepareStatement(sql);
             String gioVao = gv.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String gioRa = gr.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            pre.setObject(1, "2023-08-08 00:00:00");
-            pre.setObject(2, "2023-09-09 00:00:00");
+            pre.setObject(1, gioVao);
+            pre.setObject(2, gioRa);
             ResultSet re = pre.executeQuery();
             GiaoCaCT giaoCaCT = new GiaoCaCT();
             while (re.next()) {
@@ -112,10 +112,10 @@ public class RPGiaoCa {
         }
         return false;
     }
-
+  
     public GiaoCa getListGC() {
         ArrayList<GiaoCa> list = new ArrayList<>();
-        sql = "SELECT Sum(NghiemThu) NT FROM GiaoCa where NgayTruc = GETDATE()";
+        sql = "Select Sum(NghiemThu) NT FROM GiaoCa where NgayTruc = CAST(GETDATE() AS DATE)";
         try {
             pre = con.prepareStatement(sql);
             ResultSet re = pre.executeQuery();

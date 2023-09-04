@@ -4,7 +4,16 @@
  */
 package view;
 
+import dbConnection.DbConnection;
+import domainModel.HoaDon;
+import domainModel.HoaDonCho;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 import textfield.SearchOptinEvent;
 import textfield.SearchOption;
 
@@ -14,12 +23,15 @@ import textfield.SearchOption;
  */
 public class FormQlHoaDon extends javax.swing.JPanel {
 
+    DefaultTableModel model;
+    int index = -1;
+
     /**
      * Creates new form FormHoaDon
      */
     public FormQlHoaDon() {
         initComponents();
-           txtSearch.addEventOptionSelected(new SearchOptinEvent() {
+        txtSearch.addEventOptionSelected(new SearchOptinEvent() {
             @Override
             public void optionSelected(SearchOption so, int i) {
                 txtSearch.setHint("Tìm theo " + so.getName() + "...");
@@ -29,7 +41,62 @@ public class FormQlHoaDon extends javax.swing.JPanel {
 
         txtSearch.addOption(new SearchOption("Mã Hóa Đơn", new ImageIcon(getClass().getResource("/icon/name.png"))));
         txtSearch.addOption(new SearchOption("Tên Sân", new ImageIcon(getClass().getResource("/icon/name.png"))));
-     
+
+        
+        fillToTable(getAll());
+    }
+
+    public List<HoaDon> getAll() {
+        Connection c = DbConnection.getConnection();
+        List<HoaDon> list = new ArrayList<>();
+        String sql = "select hd.ID,sb.Ten as tenSan,nv.Ten as tenNV,km.giaKM, kh.Ten as tenKh ,hd.TrangThai,km.TenKM,TongTien,NgayThanhToan from HoaDon hd \n"
+                + " join KhachHang kh on hd.ID_KH = kh.ID  join NhanVien nv on hd.ID_NV = nv.ID \n"
+                + " join LichDat_SanBong lds on hd.Ma_LichDatSan = lds.Ma join SanBong sb on lds.ID_SB = sb.ID join KhuyenMai km on hd.KhuyenMai = km.Ma";
+        try {
+
+            PreparedStatement pts = c.prepareStatement(sql);
+
+            ResultSet rs = pts.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+
+                hd.setId(rs.getString("id"));
+                hd.setIdkh(rs.getString("tenKh"));
+                hd.setIdnv(rs.getString("tenNV"));
+                hd.setTrangThai(rs.getInt("TrangThai"));
+                hd.setMalds(rs.getString("id"));
+                hd.setNgayThanhToan(rs.getDate("NgayThanhToan"));
+                hd.setTongTien(rs.getDouble("TongTien"));
+                hd.setTenKM(rs.getString("TenKM"));
+                hd.setTenSan(rs.getString("tenSan"));
+                hd.setGiaKM(rs.getFloat("giaKm"));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    void fillToTable(List<HoaDon> list) {
+        model = (DefaultTableModel) tbDatSan.getModel();
+
+        model.setRowCount(0);
+
+        for (HoaDon hd : list) {
+            model.addRow(new Object[]{
+                hd.getId(),
+                hd.getTenSan(),
+                hd.getIdkh(),
+                hd.getNgayThanhToan(),
+                hd.getIdnv(),
+                hd.getGiaKM()+" %",
+                hd.getTongTien(),
+                hd.getTrangThai() == 0 ? "Chưa Thanh Toán" : "Đã Thanh Toán"
+            });
+        }
+
     }
 
     /**
@@ -63,6 +130,8 @@ public class FormQlHoaDon extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         txtSearch = new textfield.TextFieldSearchOption();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtKhachHang = new swing.controls.TextField1_1();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -75,11 +144,11 @@ public class FormQlHoaDon extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Hóa Đơn", "Tên Sân", "Khách Hàng", "Ngày Lập", "Tổng Tiền", "Giảm", "Thành Tiền", "Trạng Thái"
+                "Mã Hóa Đơn", "Tên Sân", "Khách Hàng", "Ngày Lập", "Người Lập", "Giảm", "Thành Tiền", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, true, true
+                false, false, false, true, true, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -113,11 +182,24 @@ public class FormQlHoaDon extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
 
-        textField1_15.setText("textField1_12");
+        textField1_15.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_15.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        textField1_15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1_15ActionPerformed(evt);
+            }
+        });
 
-        textField1_16.setText("textField1_12");
+        textField1_16.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_16.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        textField1_16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1_16ActionPerformed(evt);
+            }
+        });
 
-        textField1_17.setText("textField1_12");
+        textField1_17.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_17.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
@@ -131,7 +213,8 @@ public class FormQlHoaDon extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Tổng Tiền");
 
-        textField1_12.setText("textField1_12");
+        textField1_12.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_12.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -141,9 +224,21 @@ public class FormQlHoaDon extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Tên Sân");
 
-        textField1_13.setText("textField1_12");
+        textField1_13.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_13.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        textField1_13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1_13ActionPerformed(evt);
+            }
+        });
 
-        textField1_14.setText("textField1_12");
+        textField1_14.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_14.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        textField1_14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1_14ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -153,9 +248,11 @@ public class FormQlHoaDon extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Ngày Lập");
 
-        textField1_18.setText("textField1_12");
+        textField1_18.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_18.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        textField1_19.setText("textField1_12");
+        textField1_19.setForeground(new java.awt.Color(102, 102, 102));
+        textField1_19.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
@@ -180,6 +277,13 @@ public class FormQlHoaDon extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(153, 153, 153));
         jLabel10.setText("Quản Lý Hóa Đơn");
 
+        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel11.setText("Tên KH");
+
+        txtKhachHang.setForeground(new java.awt.Color(102, 102, 102));
+        txtKhachHang.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,10 +296,13 @@ public class FormQlHoaDon extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textField1_12, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel8))
@@ -204,22 +311,16 @@ public class FormQlHoaDon extends javax.swing.JPanel {
                                     .addComponent(textField1_14, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textField1_18, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textField1_13, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(textField1_12, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(68, 68, 68))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(textField1_17, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textField1_19, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(30, 30, 30)
@@ -228,44 +329,62 @@ public class FormQlHoaDon extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(textField1_16, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textField1_19, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(textField1_17, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textField1_15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField1_12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textField1_16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField1_13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textField1_17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField1_14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textField1_18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(14, 14, 14))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(textField1_19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textField1_18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textField1_15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField1_12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textField1_16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField1_13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textField1_17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField1_14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -279,10 +398,27 @@ public class FormQlHoaDon extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtSearchKeyPressed
 
+    private void textField1_13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1_13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1_13ActionPerformed
+
+    private void textField1_14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1_14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1_14ActionPerformed
+
+    private void textField1_16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1_16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1_16ActionPerformed
+
+    private void textField1_15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1_15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1_15ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -302,6 +438,7 @@ public class FormQlHoaDon extends javax.swing.JPanel {
     private swing.controls.TextField1_1 textField1_17;
     private swing.controls.TextField1_1 textField1_18;
     private swing.controls.TextField1_1 textField1_19;
+    private swing.controls.TextField1_1 txtKhachHang;
     private textfield.TextFieldSearchOption txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,6 +25,8 @@ import service.ServiceTaiKhoan;
 import service.ServiceThanhToan;
 import swing.model.StatusType;
 import swing.swing.ScrollBar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -41,6 +43,8 @@ public class FormThanhToan extends javax.swing.JPanel {
     service.ServiceTaiKhoan qltk = new ServiceTaiKhoan();
     ServiceThanhToan qltt = new ServiceThanhToan();
     ServiceHoaDon qlhd = new ServiceHoaDon();
+    Timer timer = new Timer();
+    boolean key = true;
 
     /**
      * Creates new form FormThanhToan
@@ -53,6 +57,7 @@ public class FormThanhToan extends javax.swing.JPanel {
         txtTT.setEnabled(false);
         txtTenKH.setEnabled(false);
         txtTienCoc.setEnabled(false);
+        txtTongTien.setEnabled(false);
 
         line.setSize(WIDTH, 1);
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -67,9 +72,17 @@ public class FormThanhToan extends javax.swing.JPanel {
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         spTable1.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-
+        timer.scheduleAtFixedRate(task, 0, 2000);
         fillTable(qlds.loadTableDV());
     }
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            if (key) {
+                fillTable(qlds.loadTableDV());
+            }
+        }
+    };
 
     void fillTable(List<LichDatSanCT> list) {
         model = (DefaultTableModel) tbDss.getModel();
@@ -359,6 +372,11 @@ public class FormThanhToan extends javax.swing.JPanel {
                 "Tên Dv", "Số Lượng", "Giá Tiền", "Thành Tiền"
             }
         ));
+        tbListDv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListDvMouseClicked(evt);
+            }
+        });
         spTable1.setViewportView(tbListDv);
 
         panelSeth4.setColor1(new java.awt.Color(153, 102, 0));
@@ -443,50 +461,57 @@ public class FormThanhToan extends javax.swing.JPanel {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         // TODO add your handling code here:
+        key = true;
         int click = JOptionPane.showConfirmDialog(this, "Chắc Chắn Thanh Toán ?");
 
         if (click == JOptionPane.YES_OPTION) {
+            String maDS = qlds.loadTableDV().get(index).getMaDS();
+            if (qlds.changeStatusDS(maDS)) {
+                int cada = (int) tbDss.getValueAt(index, 3);
+                String mds = tbDss.getValueAt(index, 0).toString();
+                LocalDate ngayLap = LocalDate.now();
+                Date date = Date.from(ngayLap.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-            int cada = (int) tbDss.getValueAt(index, 3);
-            String mds = tbDss.getValueAt(index, 0).toString();
-            LocalDate ngayLap = LocalDate.now();
-            Date date = Date.from(ngayLap.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                String nl = txtNguoiLap.getText();
+                String tenkh = txtTenKH.getText();
+                String tenSan = tbDss.getValueAt(index, 1).toString();
+                String sdt = qltt.getSDT(tbDss.getValueAt(index, 0).toString());
+                Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
+                Double tienSan = qltt.giaSan(mds, cada);
+                Double thanhTien = Double.valueOf(txtTT.getText());
+                double giamGia = 0;
 
-            String nl = txtNguoiLap.getText();
-            String tenkh = txtTenKH.getText();
-            String tenSan = tbDss.getValueAt(index, 1).toString();
-            String sdt = qltt.getSDT(tbDss.getValueAt(index, 0).toString());
-            Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
-            Double tienSan = qltt.giaSan(mds, cada);
-            Double thanhTien = Double.valueOf(txtTT.getText());
-            double giamGia = 0;
+                if (cb2.isSelected()) { 
+                    giamGia = 0.02 * thanhTien;
+                } else if (cb5.isSelected()) {
+                    giamGia = 0.05 * thanhTien;
+                } else {
+                    giamGia = 0;
+                }
+                Global gb = new Global();
+                gb.setBill(new Bill(mds, nl, date, tenkh, tenSan, tienSan, tongTienDv, giamGia, qltt.getListDv(mds)));
 
-            if (cb2.isSelected()) {
-                giamGia = 0.02 * thanhTien;
-            } else if (cb5.isSelected()) {
-                giamGia = 0.05 * thanhTien;
-            } else {
-                giamGia = 0;
+                String idnv = gb.getIdnv();
+                String idkh = qltt.getIDKH(mds);
+
+                String tenKM = "";
+                if (cb2.isSelected()) {
+                    tenKM = "Giảm 2% tổng bill >= 400000";
+                } else if (cb5.isSelected()) {
+                    tenKM = "Giảm 5% tổng bill >= 600000";
+                } else {
+                    tenKM = null;
+                }
+
+                HoaDon hd = new HoaDon(mds, idnv, idkh, 1, tenKM, idkh, thanhTien);
+                if (qlhd.addHoaDon(hd).equalsIgnoreCase("Thanh Toán Không Thành Công")) {
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, qlhd.addHoaDon(hd));
+                    FormHD form = new FormHD();
+                    form.setVisible(true);
+                }
             }
-            Global gb = new Global();
-            gb.setBill(new Bill(mds, nl, date, tenkh, tenSan, tienSan, tienSan, giamGia, qltt.getListDv(mds)));
-
-            String idnv = gb.getIdnv();
-            String idkh = qltt.getIDKH(mds);
-
-            String tenKM = "";
-            if (cb2.isSelected()) {
-                tenKM = "Giảm 2% tổng bill >= 400000";
-            } else if (cb5.isSelected()) {
-                tenKM = "Giảm 5% tổng bill >= 600000";
-            } else {
-                tenKM = null;
-            }
-
-            HoaDon hd = new HoaDon(mds, idnv, idkh, 1, tenKM, idkh, tongTienDv + tienSan);
-            JOptionPane.showMessageDialog(this, qlhd.addHoaDon(hd));
-            FormHD form = new FormHD();
-            form.setVisible(true);
         } else {
             return;
         }
@@ -512,7 +537,7 @@ public class FormThanhToan extends javax.swing.JPanel {
 
     private void tbDssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDssMouseClicked
         // TODO add your handling code here:
-
+        key = false;
         index = tbDss.getSelectedRow();
 
         fillTableDv(qlgh.getListOrder(tbDss.getValueAt(index, 0).toString()));
@@ -604,54 +629,62 @@ public class FormThanhToan extends javax.swing.JPanel {
 
     private void btChoTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChoTTActionPerformed
         // TODO add your handling code here:
+        key = true;
         int click = JOptionPane.showConfirmDialog(this, "Thêm Vào Hàng Chờ Thanh Toán ?");
 
         if (click == JOptionPane.YES_OPTION) {
+            String maDS = qlds.loadTableDV().get(index).getMaDS();
+            if (qlds.changeStatusDS(maDS)) {
+                int cada = (int) tbDss.getValueAt(index, 3);
+                String mds = tbDss.getValueAt(index, 0).toString();
+                LocalDate ngayLap = LocalDate.now();
+                Date date = Date.from(ngayLap.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-            int cada = (int) tbDss.getValueAt(index, 3);
-            String mds = tbDss.getValueAt(index, 0).toString();
-            LocalDate ngayLap = LocalDate.now();
-            Date date = Date.from(ngayLap.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                String nl = txtNguoiLap.getText();
+                String tenkh = txtTenKH.getText();
+                String tenSan = tbDss.getValueAt(index, 1).toString();
+                String sdt = qltt.getSDT(tbDss.getValueAt(index, 0).toString());
+                Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
+                Double tienSan = qltt.giaSan(mds, cada);
+                Double thanhTien = Double.valueOf(txtTT.getText());
+                double giamGia = 0;
 
-            String nl = txtNguoiLap.getText();
-            String tenkh = txtTenKH.getText();
-            String tenSan = tbDss.getValueAt(index, 1).toString();
-            String sdt = qltt.getSDT(tbDss.getValueAt(index, 0).toString());
-            Double tongTienDv = qltt.TongTien(tbDss.getValueAt(index, 0).toString());
-            Double tienSan = qltt.giaSan(mds, cada);
-            Double thanhTien = Double.valueOf(txtTT.getText());
-            double giamGia = 0;
+                if (cb2.isSelected()) {
+                    giamGia = 0.02 * thanhTien;
+                } else if (cb5.isSelected()) {
+                    giamGia = 0.05 * thanhTien;
+                } else {
+                    giamGia = 0;
+                }
+                Global gb = new Global();
+                gb.setBill(new Bill(mds, nl, date, tenkh, tenSan, tienSan, tienSan, giamGia, qltt.getListDv(mds)));
 
-            if (cb2.isSelected()) {
-                giamGia = 0.02 * thanhTien;
-            } else if (cb5.isSelected()) {
-                giamGia = 0.05 * thanhTien;
-            } else {
-                giamGia = 0;
+                String idnv = gb.getIdnv();
+                String idkh = qltt.getIDKH(mds);
+
+                String tenKM = "";
+                if (cb2.isSelected()) {
+                    tenKM = "KM1";
+                } else if (cb5.isSelected()) {
+                    tenKM = "KM2";
+                } else {
+                    tenKM = null;
+                }
+
+                HoaDon hd = new HoaDon(mds, idnv, idkh, 0, tenKM, idkh, tongTienDv + tienSan);
+                JOptionPane.showMessageDialog(this, qlhd.addHoaDonCho(hd));
+
             }
-            Global gb = new Global();
-            gb.setBill(new Bill(mds, nl, date, tenkh, tenSan, tienSan, tienSan, giamGia, qltt.getListDv(mds)));
-
-            String idnv = gb.getIdnv();
-            String idkh = qltt.getIDKH(mds);
-
-            String tenKM = "";
-            if (cb2.isSelected()) {
-                tenKM = "KM1";
-            } else if (cb5.isSelected()) {
-                tenKM = "KM2";
-            } else {
-                tenKM = null;
-            }
-
-            HoaDon hd = new HoaDon(mds, idnv, idkh, 0, tenKM, idkh, tongTienDv + tienSan);
-            JOptionPane.showMessageDialog(this, qlhd.addHoaDonCho(hd));
-          
         } else {
             return;
         }
 
     }//GEN-LAST:event_btChoTTActionPerformed
+
+    private void tbListDvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListDvMouseClicked
+        // TODO add your handling code here:
+        key = false;
+    }//GEN-LAST:event_tbListDvMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

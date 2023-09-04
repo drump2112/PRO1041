@@ -110,7 +110,6 @@
                                       <Component id="txtsdt" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>

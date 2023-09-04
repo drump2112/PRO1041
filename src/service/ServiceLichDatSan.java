@@ -23,6 +23,14 @@ public class ServiceLichDatSan {
         return repo.getList();
     }
 
+    public boolean changeStatusDS(String id) {
+        if (repo.changeStatusDS(id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public List<LichDatSanCT> loadTableDV() {
         return repo.loadTableDV();
     }
@@ -51,16 +59,15 @@ public class ServiceLichDatSan {
         }
     }
 
-    public String nhanSan(String id, LichDatSanBong lsd) {
-        if (repo.nhanSan(id, lsd)) {
-            return "Đã nhận sân";
-        } else {
-            return "nhân sân thất bại";
-        }
+    public void nhanSan(String id, LichDatSanBong lsd) {
+        repo.nhanSan(id, lsd);
     }
 
     public List<LichDatSanCT> getByMDS(String msd) {
         return repo.getByMDS(msd);
     }
 
+    public boolean checkTrung(String maSan, Date ngayDa, String tenSan, int caDa) {
+        return repo.checkTrung(maSan, ngayDa, tenSan, caDa);
+    }
 }

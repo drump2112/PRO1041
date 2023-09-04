@@ -136,7 +136,7 @@ public class FormThongTinCaNhan extends javax.swing.JFrame {
         txtNhapLaiMK = new swing.controls.PasswordField1();
         kButton2 = new com.k33ptoo.components.KButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 

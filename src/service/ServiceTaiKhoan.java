@@ -13,7 +13,6 @@ import repository.RPTaiKhoan;
  *
  * @author sethk
  */
-
 public class ServiceTaiKhoan {
 
     RPTaiKhoan RP = new RPTaiKhoan();
@@ -24,6 +23,18 @@ public class ServiceTaiKhoan {
 
     public String DangNhap(String user, String pass) {
         return RP.dangNhap(user, pass);
+    }
+
+    public void insert(TaiKhoan tk) {
+        RP.insertTaiKhoan(tk);
+    }
+
+    public void update(TaiKhoan tk) {
+        RP.UpdateTaiKhoan(tk);
+    }
+
+    public void delete(TaiKhoan tk) {
+        RP.deleteTaiKhoan(tk);
     }
 
     public String getNameStaff(String user) {

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -152,7 +153,72 @@ public class RPTaiKhoan {
         return null;
 
     }
+   public void insertTaiKhoan(TaiKhoan tk) {
+        Connection c = DbConnection.getConnection();
+        String sql = "INSERT INTO TaiKhoan(ID_NV,TenDangNhap,MatKhau,Email,SDT,macv)\n"
+                + "VALUES(?,?,?,?,?,?)";
 
+        try {
+            PreparedStatement pts = c.prepareStatement(sql);
+            pts.setString(1, tk.getIdnv());
+            pts.setString(2, tk.getTenDangNhap());
+            pts.setString(3, tk.getMatKhau());
+            pts.setString(4, tk.getEmail());
+            pts.setString(5, tk.getSdt());
+            pts.setString(6, tk.getIdcv());
+
+            int i = pts.executeUpdate();
+            if (i > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+            } else {
+                JOptionPane.showMessageDialog(null, "Thêm không thành công");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void UpdateTaiKhoan(TaiKhoan tk) {
+        Connection c = DbConnection.getConnection();
+        String sql = "UPDATE TaiKhoan SET TenDangNhap = ? , MatKhau = ? , Email = ? , SDT = ? , macv = ? WHERE ID_NV = ?";
+
+        try {
+            PreparedStatement pts = c.prepareStatement(sql);
+            pts.setString(1, tk.getTenDangNhap());
+            pts.setString(2, tk.getMatKhau());
+            pts.setString(3, tk.getEmail());
+            pts.setString(4, tk.getSdt());
+            pts.setString(5, tk.getIdcv());
+            pts.setString(6, tk.getIdnv());
+
+            int i = pts.executeUpdate();
+            if (i > 0) {
+                JOptionPane.showMessageDialog(null, "Update thành công");
+            } else {
+                JOptionPane.showMessageDialog(null, "Update không thành công");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void deleteTaiKhoan(TaiKhoan tk) {
+        Connection c = DbConnection.getConnection();
+        String sql = "delete TaiKhoan WHERE ID_NV = ?";
+
+        try {
+            PreparedStatement pts = c.prepareStatement(sql);
+            pts.setString(1, tk.getIdnv());
+            int i = pts.executeUpdate();
+            if (i > 0) {
+                JOptionPane.showMessageDialog(null, "Delete thành công");
+            } else {
+                JOptionPane.showMessageDialog(null, "Delete không thành công");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         RPTaiKhoan rp = new RPTaiKhoan();
         System.out.println(rp.getNameStaff("toitq2002"));

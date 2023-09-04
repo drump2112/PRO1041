@@ -18,11 +18,12 @@ public class HoaDon {
     private String idnv;
     private String idkh;
     private int trangThai;
-
+    private String tenSan;
     private String tenKM;
     private String idGH;
     private Double tongTien;
-
+    private Date ngayThanhToan;
+    private float giaKM;
     public HoaDon() {
     }
 
@@ -107,6 +108,38 @@ public class HoaDon {
 
     public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
+    }
+
+    public String getMalds() {
+        return malds;
+    }
+
+    public void setMalds(String malds) {
+        this.malds = malds;
+    }
+
+    public Date getNgayThanhToan() {
+        return ngayThanhToan;
+    }
+
+    public void setNgayThanhToan(Date ngayThanhToan) {
+        this.ngayThanhToan = ngayThanhToan;
+    }
+
+    public String getTenSan() {
+        return tenSan;
+    }
+
+    public void setTenSan(String tenSan) {
+        this.tenSan = tenSan;
+    }
+
+    public float getGiaKM() {
+        return giaKM;
+    }
+
+    public void setGiaKM(float giaKM) {
+        this.giaKM = giaKM;
     }
     
     

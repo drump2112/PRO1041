@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import service.ServiceTaiKhoan;
 import global.Global;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -159,7 +160,10 @@ public class FormDangNhap extends javax.swing.JFrame {
 
         gl.setUser(user);
         gl.setIdnv(idnv);
-
+        
+        gl.setPass(pass);
+        LocalDateTime time = LocalDateTime.now();
+        gl.setGioVao(time);
         if (qltk.DangNhap(user, pass).equals("NV")) {
             this.dispose();
             new FormNhanVien().setVisible(true);

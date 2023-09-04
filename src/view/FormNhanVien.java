@@ -5,10 +5,14 @@
 package view;
 
 import com.formdev.flatlaf.IntelliJTheme;
+import domainModel.GiaoCa;
+import domainModel.GiaoCaCT;
 import global.Global;
 import java.awt.Color;
+import java.time.LocalDateTime;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import service.ServiceGiaoCa;
 import service.ServiceTaiKhoan;
 import swing.event.EventMenuSelected;
 
@@ -25,6 +29,8 @@ public class FormNhanVien extends javax.swing.JFrame {
     FormGiaoCa formGc;
     FormService formSv;
     ServiceTaiKhoan qltk = new ServiceTaiKhoan();
+    ServiceGiaoCa qlGC = new ServiceGiaoCa();
+    FormHoaDonCho formW;
 
     /**
      * Creates new form FormQuanLy
@@ -41,8 +47,10 @@ public class FormNhanVien extends javax.swing.JFrame {
         formQLNV = new FormQLNV();
         formTT = new FormThanhToan();
         formSv = new FormService();
+        formW = new FormHoaDonCho();
+        formGc = new FormGiaoCa(this);
         menu.initMoving(FormNhanVien.this);
-        
+
         menu.addEventMenuSelected(new EventMenuSelected() {
             public void selected(int index) {
                 if (index == 0) {
@@ -53,6 +61,8 @@ public class FormNhanVien extends javax.swing.JFrame {
                     setForm(formTT);
                 } else if (index == 3) {
                     setForm(formTK);
+                } else if (index == 4) {
+                    setForm(formW);
                 } else if (index == 5) {
                     setForm(formGc);
                 } else if (index == 9) {
@@ -84,6 +94,31 @@ public class FormNhanVien extends javax.swing.JFrame {
     }
 
     public void logOut() {
+        try {
+            int choose = JOptionPane.showConfirmDialog(null, "Bạn có chắc là muốn đăng xuất", "Đóng ca", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (JOptionPane.YES_OPTION == choose) {
+//                Global.setKeyChucNang(true);
+                Double tongTien = 0.0;
+                LocalDateTime timeNow = LocalDateTime.now();
+                GiaoCaCT giaoCa = qlGC.getTT(Global.getGioVao(), timeNow);
+                GiaoCaCT giaoCa2 = qlGC.getTC(Global.getGioVao(), timeNow);
+                tongTien = giaoCa.getTongTien() + giaoCa2.getTienCoc();
+                if (tongTien > 0) {
+                    GiaoCa gc = new GiaoCa();
+                    gc.setNguoiGiao(Global.getUser());
+                    gc.setTienTrongCa(tongTien);
+                    qlGC.insertGiaoCa(gc, Global.getGioVao(), timeNow);
+                    JOptionPane.showMessageDialog(null, "Đã lưu tiến trình làm việc của bạn");
+                }
+                this.dispose();
+                new FormDangNhap().setVisible(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void logOut2() {
         this.dispose();
         new FormDangNhap().setVisible(true);
     }

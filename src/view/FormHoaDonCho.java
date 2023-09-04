@@ -18,6 +18,8 @@ import service.ServiceHoaDon;
 import swing.swing.ScrollBar;
 import textfield.SearchOptinEvent;
 import textfield.SearchOption;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -30,6 +32,8 @@ public class FormHoaDonCho extends javax.swing.JPanel {
     ServiceHoaDon qlhd = new ServiceHoaDon();
     ServiceGioHang qlgh = new ServiceGioHang();
     int index = -1;
+    Timer timer = new Timer();
+    boolean key = true;
 
     /**
      * Creates new form FormNhanSan
@@ -55,7 +59,16 @@ public class FormHoaDonCho extends javax.swing.JPanel {
         txtSearch.addOption(new SearchOption("Tên Khách Hàng", new ImageIcon(getClass().getResource("/icon/name.png"))));
 
         fillToTable(qlhd.getListBillWait());
+        timer.scheduleAtFixedRate(task, 0, 2000);
     }
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            if(key){
+            fillToTable(qlhd.getListBillWait());
+            }
+        }
+    };
 
     void fillToTable(List<HoaDonCho> list) {
         model = (DefaultTableModel) tbDsHD.getModel();
@@ -124,6 +137,11 @@ public class FormHoaDonCho extends javax.swing.JPanel {
                 "Tên Dv", "Số Lượng", "Giá Tiền", "Thành Tiền"
             }
         ));
+        tbListDv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListDvMouseClicked(evt);
+            }
+        });
         spTable1.setViewportView(tbListDv);
 
         javax.swing.GroupLayout panelSeth3Layout = new javax.swing.GroupLayout(panelSeth3);
@@ -286,11 +304,12 @@ public class FormHoaDonCho extends javax.swing.JPanel {
 
     private void btnNhanSan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanSan1ActionPerformed
         // TODO add your handling code here
+        key = true;
     }//GEN-LAST:event_btnNhanSan1ActionPerformed
 
     private void btnNhanSan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanSan2ActionPerformed
         // TODO add your handling code here:
-
+        key = true;
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn Hóa Đơn Cần Thanh Toán!");
             return;
@@ -309,6 +328,7 @@ public class FormHoaDonCho extends javax.swing.JPanel {
 
     private void tbDsHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDsHDMouseClicked
         // TODO add your handling code here:
+        key = false;
         index = tbDsHD.getSelectedRow();
 
         String mds = tbDsHD.getValueAt(index, 1).toString();
@@ -331,6 +351,11 @@ public class FormHoaDonCho extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void tbListDvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListDvMouseClicked
+        key = false;
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbListDvMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

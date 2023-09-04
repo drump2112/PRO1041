@@ -25,18 +25,18 @@ public class LichDatSanBong {
     public LichDatSanBong() {
     }
 
-    public LichDatSanBong(Date ngayDat) {
-        this.ngayDat = ngayDat;
+    public LichDatSanBong(Date ngayDa) {
+        this.ngayDa = ngayDa;
     }
 
-    public LichDatSanBong(String maDatSan, String idSb, String idNv, String idKh, Double tienCoc, int caDa, Date ngayDat) {
+    public LichDatSanBong(String maDatSan, String idSb, String idNv, String idKh, Double tienCoc, int caDa, Date ngayDa) {
         this.maDatSan = maDatSan;
         this.idSb = idSb;
         this.idNv = idNv;
         this.idKh = idKh;
         this.tienCoc = tienCoc;
         this.caDa = caDa;
-        this.ngayDat = ngayDat;
+        this.ngayDa = ngayDa;
     }
 
     public int getCaDa() {

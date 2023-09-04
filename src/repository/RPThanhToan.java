@@ -117,7 +117,7 @@ public class RPThanhToan {
         Connection c = DbConnection.getConnection();
         List<GioHang> list = new ArrayList<>();
 
-        String sql = "SELECT b.Ten_Dv, a.SoLuong,b.Gia_Tien FROM dbo.giohang a LEFT JOIN  dbo.DichVu b ON b.madv = a.MaDV WHERE a.mads = ? ";
+        String sql = "SELECT b.Ten_Dv, SUM(a.SoLuong) AS SoLuong , b.Gia_Tien FROM dbo.giohang a LEFT JOIN  dbo.DichVu b ON b.madv = a.MaDV WHERE a.mads = ? GROUP BY b.Ten_Dv,b.Gia_Tien   ";
         try {
 
             PreparedStatement pts = c.prepareStatement(sql);

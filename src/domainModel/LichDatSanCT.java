@@ -20,12 +20,28 @@ public class LichDatSanCT {
     private String sdt;
     private String tenNv;
     private int ca;
-
+    private Time gioBD;
+    private Time gioKT;
     private Date ngay;
     private Integer trangThai;
     private Double tienDatCoc;
 
     public LichDatSanCT() {
+    }
+
+    public LichDatSanCT(String maDS, String tenSan, Integer loai, String tenKh, String sdt, String tenNv, int ca, Time gioBD, Time gioKT, Date ngay, Integer trangThai, Double tienDatCoc) {
+        this.maDS = maDS;
+        this.tenSan = tenSan;
+        this.loai = loai;
+        this.tenKh = tenKh;
+        this.sdt = sdt;
+        this.tenNv = tenNv;
+        this.ca = ca;
+        this.gioBD = gioBD;
+        this.gioKT = gioKT;
+        this.ngay = ngay;
+        this.trangThai = trangThai;
+        this.tienDatCoc = tienDatCoc;
     }
 
     public LichDatSanCT(String maDS, String tenSan, Integer loai, String tenKh, String sdt, String tenNv, int ca, Date ngay, Integer trangThai, Double tienDatCoc) {
@@ -126,6 +142,22 @@ public class LichDatSanCT {
 
     public void setTienDatCoc(Double tienDatCoc) {
         this.tienDatCoc = tienDatCoc;
+    }
+
+    public Time getGioBD() {
+        return gioBD;
+    }
+
+    public void setGioBD(Time gioBD) {
+        this.gioBD = gioBD;
+    }
+
+    public Time getGioKT() {
+        return gioKT;
+    }
+
+    public void setGioKT(Time gioKT) {
+        this.gioKT = gioKT;
     }
 
 }

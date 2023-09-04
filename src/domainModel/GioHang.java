@@ -49,6 +49,12 @@ public class GioHang {
         this.maDv = maDv;
         this.soLuong = soLuong;
     }
+     public GioHang(String maDv, String maDs, int soLuong, Double giaTien) {
+        this.maDs = maDs;
+        this.maDv = maDv;
+        this.soLuong = soLuong;
+        this.giaTien = giaTien;
+    }
 
     public GioHang(String tenDv, int soLuong, Double giaTien) {
         this.tenDv = tenDv;

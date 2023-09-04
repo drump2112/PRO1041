@@ -19,6 +19,8 @@ import service.ServiceGioHang;
 import service.ServiceLichDatSan;
 import swing.model.StatusType;
 import swing.swing.ScrollBar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -28,7 +30,8 @@ public class FormService extends javax.swing.JPanel {
 
     DefaultTableModel model;
     DefaultTableModel model1;
-
+    Timer timer = new Timer();
+    boolean key = true;
     ServiceDichVu qldv = new ServiceDichVu();
     ServiceGioHang qlgh = new ServiceGioHang();
     ServiceLichDatSan qlds = new ServiceLichDatSan();
@@ -63,9 +66,18 @@ public class FormService extends javax.swing.JPanel {
         panelBorder7.setBackground(new Color(0, 0, 0, 0));
         panelBorder8.setBackground(new Color(0, 0, 0, 0));
         loadGiaDichvu(qldv.getListGiaDv());
-
+        timer.scheduleAtFixedRate(task, 0, 2000);
         fillToTable1(qlds.loadTableDV());
+        key = true;
     }
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+           if (key) {
+                fillToTable1(qlds.loadTableDV());
+           }
+        }
+    };
 
     void loadGiaDichvu(List<Double> list) {
         jlWater.setText(list.get(0).toString());
@@ -83,12 +95,16 @@ public class FormService extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (LichDatSanCT lds : list) {
-            model.addRow(new Object[]{
-                lds.getTenSan(),
-                lds.getMaDS(),
-                lds.getTenKh(),
-                lds.getTrangThai() == 1 ? StatusType.RESERVED : StatusType.USING
-            });
+            if (lds.getTrangThai() == 3) {
+                continue;
+            } else {
+                model.addRow(new Object[]{
+                    lds.getTenSan(),
+                    lds.getMaDS(),
+                    lds.getTenKh(),
+                    lds.getTrangThai() == 1 ? StatusType.RESERVED : StatusType.USING
+                });
+            }
         }
     }
 
@@ -107,6 +123,17 @@ public class FormService extends javax.swing.JPanel {
                 gioHang.getSoLuong() * gioHang.getGiaTien()
             });
         }
+    }
+
+    void clear() {
+        jsBong.setValue(0);
+        jsCoca.setValue(0);
+        jsNcLoc.setValue(0);
+        jsQA.setValue(0);
+        jsXx.setValue(0);
+        jsSnack.setValue(0);
+        jsRv.setValue(0);
+        jsShose.setValue(0);
     }
 
     /**
@@ -198,6 +225,8 @@ public class FormService extends javax.swing.JPanel {
 
         jlWater.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
+        jsNcLoc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jsNcLoc.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsNcLoc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsNcLocKeyPressed(evt);
@@ -259,6 +288,8 @@ public class FormService extends javax.swing.JPanel {
 
         bimbim.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
+        jsSnack.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jsSnack.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsSnack.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsSnackKeyPressed(evt);
@@ -322,6 +353,8 @@ public class FormService extends javax.swing.JPanel {
 
         bong.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
+        jsBong.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jsBong.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsBong.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsBongKeyPressed(evt);
@@ -385,7 +418,8 @@ public class FormService extends javax.swing.JPanel {
 
         coCa.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
-        jsCoca.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jsCoca.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jsCoca.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsCoca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsCocaKeyPressed(evt);
@@ -450,6 +484,8 @@ public class FormService extends javax.swing.JPanel {
 
         quanAo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
+        jsQA.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jsQA.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsQA.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsQAKeyPressed(evt);
@@ -512,6 +548,8 @@ public class FormService extends javax.swing.JPanel {
 
         giay.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
+        jsShose.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jsShose.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsShose.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsShoseKeyPressed(evt);
@@ -575,6 +613,8 @@ public class FormService extends javax.swing.JPanel {
 
         xucXich.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
+        jsXx.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jsXx.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsXx.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsXxKeyPressed(evt);
@@ -636,6 +676,8 @@ public class FormService extends javax.swing.JPanel {
 
         revive.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
 
+        jsRv.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jsRv.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jsRv.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jsRvKeyPressed(evt);
@@ -735,6 +777,11 @@ public class FormService extends javax.swing.JPanel {
                 "Tên Dịch Vụ", "Số Lượng", "Thành Tiền"
             }
         ));
+        tbListDv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListDvMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbListDv);
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 22)); // NOI18N
@@ -815,9 +862,9 @@ public class FormService extends javax.swing.JPanel {
             .addGroup(panelSeth1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(btnThemDV, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(btnThemDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -879,10 +926,16 @@ public class FormService extends javax.swing.JPanel {
     }//GEN-LAST:event_jsNcLocKeyPressed
 
     private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
+        key = true;
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chọn sân cần sử dụng dịch vụ !!!");
         } else {
             qlgh.addGioHang(listOrder);
+            fillTableDv(qlgh.getListOrder(tbDss.getValueAt(index, 1).toString()));
+
+            listOrder.removeAll(listOrder);
+            clear();
+
         }
     }//GEN-LAST:event_btnThemDVActionPerformed
 
@@ -895,6 +948,7 @@ public class FormService extends javax.swing.JPanel {
 
     private void btnThemDV1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDV1ActionPerformed
         // TODO add your handling code here:
+        key = true;
     }//GEN-LAST:event_btnThemDV1ActionPerformed
 
     private void jsSnackKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jsSnackKeyPressed
@@ -933,7 +987,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsRv.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString())));
+                listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString()), Double.parseDouble(revive.getText())));
             }
         }
     }//GEN-LAST:event_btnRVActionPerformed
@@ -946,7 +1000,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsNcLoc.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MDV1", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsNcLoc.getValue().toString())));
+                listOrder.add(new GioHang("MDV1", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsNcLoc.getValue().toString()), Double.parseDouble(jlWater.getText())));
             }
         }
     }//GEN-LAST:event_btnWaterActionPerformed
@@ -959,7 +1013,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsSnack.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MDV2", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsSnack.getValue().toString())));
+                listOrder.add(new GioHang("MDV2", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsSnack.getValue().toString()), Double.parseDouble(bimbim.getText())));
             }
         }
     }//GEN-LAST:event_btnSackActionPerformed
@@ -972,7 +1026,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsQA.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MDV3", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsQA.getValue().toString())));
+                listOrder.add(new GioHang("MDV3", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsQA.getValue().toString()), Double.parseDouble(quanAo.getText())));
             }
         }
 
@@ -986,7 +1040,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsShose.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MDV4", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsShose.getValue().toString())));
+                listOrder.add(new GioHang("MDV4", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsShose.getValue().toString()), Double.parseDouble(giay.getText())));
             }
         }
 
@@ -1000,7 +1054,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsXx.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString())));
+                listOrder.add(new GioHang("MD6", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsRv.getValue().toString()), Double.parseDouble(xucXich.getText())));
             }
         }
 
@@ -1014,7 +1068,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsBong.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MDV8 ", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsBong.getValue().toString())));
+                listOrder.add(new GioHang("MDV8 ", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsBong.getValue().toString()), Double.parseDouble(bong.getText())));
             }
         }
 
@@ -1028,7 +1082,7 @@ public class FormService extends javax.swing.JPanel {
             if ((int) jsCoca.getValue() == 0) {
                 return;
             } else {
-                listOrder.add(new GioHang("MDV7", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsCoca.getValue().toString())));
+                listOrder.add(new GioHang("MDV7", tbDss.getValueAt(index, 1).toString(), Integer.parseInt(jsCoca.getValue().toString()), Double.parseDouble(coCa.getText())));
             }
         }
 
@@ -1036,11 +1090,16 @@ public class FormService extends javax.swing.JPanel {
 
     private void tbDssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDssMouseClicked
         // TODO add your handling code here:
-
+        key = false;
         index = tbDss.getSelectedRow();
 
         fillTableDv(qlgh.getListOrder(tbDss.getValueAt(index, 1).toString()));
     }//GEN-LAST:event_tbDssMouseClicked
+
+    private void tbListDvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListDvMouseClicked
+        // TODO add your handling code here:
+        key = false;
+    }//GEN-LAST:event_tbListDvMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

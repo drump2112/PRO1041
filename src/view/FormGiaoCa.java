@@ -28,13 +28,12 @@ public class FormGiaoCa extends javax.swing.JPanel {
 
 //    private Global gl = new Global();
     private ServiceGiaoCa service = new ServiceGiaoCa();
-    LocalDateTime date2 = LocalDateTime.now();
     ServiceTaiKhoan qltk = new ServiceTaiKhoan();
     LocalTime startTime = LocalTime.of(16, 10);
-    LocalTime endTime = LocalTime.of(22, 30);
-
+    LocalTime endTime = LocalTime.of(23, 59);
     LocalDateTime currentDateTime = LocalDateTime.now();
     LocalTime currentTime = currentDateTime.toLocalTime();
+    FormNhanVien fnv;
 
     /**
      * Creates new form FormGiaoCA
@@ -51,15 +50,45 @@ public class FormGiaoCa extends javax.swing.JPanel {
         txtTongTienCacCa.setText(Global.getTienBanGiaoCa() + "");
         if (qltk.DangNhap(Global.getUser(), Global.getPass()).equals("QL")) {
             btnBanGiaoCa.setEnabled(false);
+            txtNguoiGiao.setText("");
+            txtNguoiGiao.setEnabled(false);
+            txtThucTeGiao.setEnabled(false);
         }
 
-        if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)) {
+        if (currentTime.isAfter(startTime)) {
+            txtNguoiNhan.setEnabled(false);
+        }
+    }
+
+    /**
+     * Creates new form FormGiaoCA
+     */
+    public FormGiaoCa(FormNhanVien nv) {
+        this.fnv = nv;
+        initComponents();
+        setBackground(new Color(0, 0, 0, 0));
+        txtNguoiGiao.setText(Global.getUser());
+        txtTienCoc.setEnabled(false);
+        txtTongTien.setEnabled(false);
+        txtTongDoanhThu.setEnabled(false);
+        txtTongTienCacCa.setEnabled(false);
+
+        txtTongTienCacCa.setText(Global.getTienBanGiaoCa() + "");
+        if (qltk.DangNhap(Global.getUser(), Global.getPass()).equals("QL")) {
+            btnBanGiaoCa.setEnabled(false);
+            txtNguoiGiao.setText("");
+            txtNguoiGiao.setEnabled(false);
+            txtThucTeGiao.setEnabled(false);
+        }
+
+        if (currentTime.isAfter(startTime)) {
             txtNguoiNhan.setEnabled(false);
         }
     }
 
     public void showChotCa() {
         try {
+            LocalDateTime date2 = LocalDateTime.now();
             GiaoCaCT tongTien = service.getTT(Global.getGioVao(), date2);
             GiaoCaCT tiecCoc = service.getTC(Global.getGioVao(), date2);
             txtTongTien.setText(tongTien.getTongTien() + "");
@@ -74,11 +103,14 @@ public class FormGiaoCa extends javax.swing.JPanel {
 
     public boolean kiemTraDieuKien() {
 
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalTime currentTime = currentDateTime.toLocalTime();
+
         if (Uhelper.checkEmpty(txtNguoiGiao, "Không được để trống người giao")) {
             return false;
         }
 
-        if (!(currentTime.isAfter(startTime) && currentTime.isBefore(endTime))) {
+        if (!(currentTime.isAfter(startTime))) {
             if (Uhelper.checkEmpty(txtNguoiNhan, "Không được để trống người nhận")) {
                 return false;
             }
@@ -113,17 +145,17 @@ public class FormGiaoCa extends javax.swing.JPanel {
             return false;
         }
 
-//        if (Double.parseDouble(txtTongTienCacCa.getText()) != Double.parseDouble(txtThucTeGiao.getText())) {
-//            JOptionPane.showMessageDialog(null, "Tiền bàn giao không đủ");
-//            return false;
-//        }
-        //////////////////////////////
-
-        if (service.getListTenTK(txtNguoiNhan.getText()) == null) {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập tên đăng nhập đúng của bạn phần người nhận");
+        if (Double.parseDouble(txtTongDoanhThu.getText()) != Double.parseDouble(txtThucTeGiao.getText())) {
+            JOptionPane.showMessageDialog(null, "Tiền bàn giao không đủ");
             return false;
         }
-
+        //////////////////////////////
+        if (!(currentTime.isAfter(startTime))) {
+            if (service.getListTenTK(txtNguoiNhan.getText()) == null) {
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập tên đăng nhập đúng của bạn phần người nhận");
+                return false;
+            }
+        }
         if (service.getListTenTK(txtNguoiGiao.getText()) == null) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập tên đăng nhập đúng của bạn phần người giao");
             return false;
@@ -204,7 +236,7 @@ public class FormGiaoCa extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tổng tiền");
 
-        btnChotCa.setForeground(new java.awt.Color(102, 102, 102));
+        btnChotCa.setForeground(new java.awt.Color(255, 255, 255));
         btnChotCa.setText("Xem");
         btnChotCa.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnChotCa.addActionListener(new java.awt.event.ActionListener() {
@@ -300,7 +332,7 @@ public class FormGiaoCa extends javax.swing.JPanel {
             }
         });
 
-        btnBanGiaoCa.setForeground(new java.awt.Color(102, 102, 102));
+        btnBanGiaoCa.setForeground(new java.awt.Color(255, 255, 255));
         btnBanGiaoCa.setText("Bàn giao ca");
         btnBanGiaoCa.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnBanGiaoCa.addActionListener(new java.awt.event.ActionListener() {
@@ -378,36 +410,37 @@ public class FormGiaoCa extends javax.swing.JPanel {
         if (qltk.DangNhap(Global.getUser(), Global.getPass()).equals("QL")) {
             GiaoCa gc = service.getlistGC();
             txtTongTienCacCa.setText(gc.getTienTrongCa() + "");
+            txtNguoiGiao.setText("");
             return;
         }
         try {
-            int Select = JOptionPane.showConfirmDialog(null, "Bạn có chắc là muốn chốt ca không", "Chốt ca", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (JOptionPane.YES_OPTION == Select) {
-                showChotCa();
-            }
+            showChotCa();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnChotCaActionPerformed
 
     private void btnBanGiaoCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanGiaoCaActionPerformed
         LocalDateTime localDate = LocalDateTime.now();
-
         try {
             if (kiemTraDieuKien()) {
-//                GiaoCa gc = new GiaoCa();
-//                gc.setNguoiNhan(txtNguoiNhan.getText());
-//                gc.setNguoiGiao(txtNguoiGiao.getText());
-//                gc.setTienTrongCa(Double.parseDouble(txtTongDoanhThu.getText()));
-//                gc.setGioRa(localDate);
-//                gc.setGioiVao(Global.getGioVao());
-//                boolean bl = service.insertGiaoCa(gc, date2, localDate);
-//                if (bl) {
-//                    JOptionPane.showMessageDialog(null, "Giao ca thành công");
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Giao ca không thành công");
-//                }
-
+                int choose = JOptionPane.showConfirmDialog(null, "Bạn có muốn bàn giao ca không", "Bàn giao", JOptionPane.YES_NO_CANCEL_OPTION);
+                if (choose == JOptionPane.YES_OPTION) {
+                    GiaoCa gc = new GiaoCa();
+                    gc.setNguoiNhan(txtNguoiNhan.getText());
+                    gc.setNguoiGiao(txtNguoiGiao.getText());
+                    gc.setTienTrongCa(Double.parseDouble(txtTongDoanhThu.getText()));
+                    gc.setGioRa(localDate);
+                    gc.setGioiVao(Global.getGioVao());
+                    boolean bl = service.insertGiaoCa(gc, Global.getGioVao(), localDate);
+                    if (bl) {
+                        JOptionPane.showMessageDialog(null, "Giao ca thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Giao ca không thành công");
+                    }
+                }
             }
+            fnv.logOut2();
         } catch (Exception e) {
             e.printStackTrace();
         }

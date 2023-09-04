@@ -31,6 +31,9 @@ import service.ServiceLichDatSan;
 import swing.model.StatusType;
 import textfield.SearchOptinEvent;
 import textfield.SearchOption;
+import java.util.Timer;
+import java.util.TimerTask;
+import global.Uhelper;
 
 /**
  *
@@ -45,6 +48,8 @@ public class FormDatSan extends javax.swing.JPanel {
     RPTaiKhoan repoTK = new RPTaiKhoan();
     ServiceLichDatSan qlds = new ServiceLichDatSan();
     String check = null;
+    Timer timer = new Timer();
+    boolean key = true;
 
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -73,26 +78,39 @@ public class FormDatSan extends javax.swing.JPanel {
 
         loadCB(qlds.loadCB());
         fillTable(qlds.getList());
-
+        timer.scheduleAtFixedRate(task, 0, 2000);
     }
+
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            if (key) {
+                fillTable(qlds.getList());
+            }
+        }
+    };
 
     void fillTable(List<LichDatSanCT> list) {
         model = (DefaultTableModel) tbDatSan.getModel();
         model.setRowCount(0);
 
         for (LichDatSanCT lsd : list) {
-            model.addRow(new Object[]{
-                lsd.getMaDS(),
-                lsd.getTenSan(),
-                lsd.getLoai(),
-                lsd.getTenKh(),
-                lsd.getSdt(),
-                lsd.getCa(),
-                format.format(lsd.getNgay()),
-                lsd.getTenNv(),
-                lsd.getTienDatCoc(),
-                lsd.getTrangThai() == 0 ? StatusType.EMPTY : (lsd.getTrangThai() == 1 ? StatusType.RESERVED : StatusType.USING)
-            });
+            if (lsd.getTrangThai() == 3) {
+                continue;
+            } else {
+                model.addRow(new Object[]{
+                    lsd.getMaDS(),
+                    lsd.getTenSan(),
+                    lsd.getLoai(),
+                    lsd.getTenKh(),
+                    lsd.getSdt(),
+                    lsd.getCa() + "( " + lsd.getGioBD() + " -> " + lsd.getGioKT() + ")",
+                    format.format(lsd.getNgay()),
+                    lsd.getTenNv(),
+                    lsd.getTienDatCoc(),
+                    lsd.getTrangThai() == 0 ? StatusType.EMPTY : (lsd.getTrangThai() == 1 ? StatusType.RESERVED : StatusType.USING)
+                });
+            }
         }
     }
 
@@ -117,25 +135,25 @@ public class FormDatSan extends javax.swing.JPanel {
                 cboCaDa.getSelectedIndex() + 1,
                 txtDate.getDate());
     }
-
-    public boolean checkTrung(int cd, Date nd, String ts) {
-        java.sql.Connection con = DbConnection.getConnection();
-        String sql = "select * from LichDat_SanBong lds join SanBong sb on lds.ID_SB=sb.ID where  lds.ID_CaDa = ? and lds.NgayDat = ? and sb.Ten = ?";
-        try {
-            java.sql.PreparedStatement pts = con.prepareStatement(sql);
-            pts.setObject(1, cd);
-            pts.setObject(2, new java.sql.Date(nd.getTime()));
-            pts.setObject(3, ts);
-            java.sql.ResultSet rs = pts.executeQuery();
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Ca bạn chọn đã được đặt");
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
+//
+//    public boolean checkTrung(int cd, Date nd, String ts) {
+//        java.sql.Connection con = DbConnection.getConnection();
+//        String sql = "select * from LichDat_SanBong lds join SanBong sb on lds.ID_SB=sb.ID where  lds.ID_CaDa = ? and lds.NgayDat = ? and sb.Ten = ?";
+//        try {
+//            java.sql.PreparedStatement pts = con.prepareStatement(sql);
+//            pts.setObject(1, cd);
+//            pts.setObject(2, new java.sql.Date(nd.getTime()));
+//            pts.setObject(3, ts);
+//            java.sql.ResultSet rs = pts.executeQuery();
+//            if (rs.next()) {
+//                JOptionPane.showMessageDialog(null, "Ca bạn chọn đã được đặt");
+//                return false;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return true;
+//    }
 
     boolean check() {
         if (Uhelper.checkEmpty(txtHotenKh, "Họ Tên Khách Hàng Trống!")) {
@@ -144,15 +162,57 @@ public class FormDatSan extends javax.swing.JPanel {
         if (Uhelper.checkEmpty(txtSdtKH, "SĐT Khách Hàng Trống!")) {
             return false;
         }
-        if (Uhelper.CheckSDT(txtSdtKH, "SĐT Sai Định Dạng")) {
-            return false;
-        }
         if (Uhelper.checkEmpty(txtMaDs, "Mã Đặt Sân Trống!")) {
             return false;
         }
+        if (Uhelper.checkEmpty(txtTienCoc, "Tiền cọc Trống!")) {
+            return false;
+        }
 
-        if (Uhelper.checkSo(txtTienCoc) && txtTienCoc.getText().trim().length() != 0) {
-            JOptionPane.showMessageDialog(this, "Tiền là Số");
+        if (Uhelper.checkKiTuDacBietTruDauCach(txtHotenKh, "Họ Tên Khách Hàng không có kí tự đặc biệt!")) {
+            return false;
+        }
+        if (Uhelper.checkKiTuDacBietTruSo(txtSdtKH, "SĐT Khách Hàng không có kí tự đặc biệt!")) {
+            return false;
+        }
+        if (Uhelper.checkKiTuDacBietTruSoVaChu(txtMaDs, "Mã Đặt Sân không có kí tự đặc biệt!")) {
+            return false;
+        }
+
+        if (Uhelper.checkKiTuDacBietTruSo(txtTienCoc, "Tiền cọc không có kí tự đặc biệt!")) {
+            return false;
+        }
+        if (Uhelper.checkTenNguoiDungKhongCoSo(txtHotenKh, "Tên khách hàng không được có số")) {
+            return false;
+        }
+        if (Uhelper.checkDoDaiChuoi20(txtHotenKh, "Tên khách hàng không quá 20 kí tự")) {
+            return false;
+        }
+        if (Uhelper.checkDoDaiTenKH(txtHotenKh, "Tên khách hàng phải nhiều hơn 7 kí tự")) {
+            return false;
+        }
+        if (Uhelper.checkCo4KhoangTrang(txtHotenKh, "Tên khách hàng không nhiều hơn 4 khoảng trắng")) {
+            return false;
+        }
+        if (Uhelper.checkChuoiKhongQua2DauCach(txtHotenKh, "Tên khách hàng không quá 2 dấu cách mỗi từ")) {
+            return false;
+        }
+        if (Uhelper.CheckSDT(txtSdtKH, "SĐT Sai Định Dạng")) {
+            return false;
+        }
+        if (Uhelper.checkDoDaiChuoi10(txtMaDs, "Mã đặt sân không quá 10 kí tự")) {
+            return false;
+        }
+        if (Uhelper.checkDoDaiChuoiLonHon3(txtMaDs, "Mã đặt sân không ít hơn 4 kí tự")) {
+            return false;
+        }
+        if (Uhelper.checkPhaiLaSo(txtTienCoc, "Tiền là Số")) {
+            return false;
+        }
+        if (Uhelper.checkSoLonHon0(txtTienCoc, "Tiền cọc phải lớn hơn 0")) {
+            return false;
+        }
+        if (Uhelper.checkKhongQua50chuc(txtTienCoc, "Tiền cọc phải từ 50000")) {
             return false;
         }
         if (check == null || check.equals("")) {
@@ -161,6 +221,10 @@ public class FormDatSan extends javax.swing.JPanel {
         }
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Muốn Đặt Sấn");
+            return false;
+        }
+
+        if (qlds.checkTrung(txtMaDs.getText().trim(), txtDate.getDate(), check, cboCaDa.getSelectedIndex() + 1)) {
             return false;
         }
         return true;
@@ -881,11 +945,13 @@ public class FormDatSan extends javax.swing.JPanel {
         if (check() && checkCaDa()) {
             JOptionPane.showMessageDialog(this, qlds.addLichDatSan(readForm(), readFormKh()));
             fillTable(qlds.getList());
+            key = true;
         }
     }//GEN-LAST:event_btnDatSanActionPerformed
 
     private void btnHuySanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuySanActionPerformed
         // TODO add your handling code here:
+        key = true;
         String id = tbDatSan.getValueAt(index, 0).toString();
         JOptionPane.showMessageDialog(this, qlds.huySan(id));
         fillTable(qlds.getList());
@@ -895,11 +961,14 @@ public class FormDatSan extends javax.swing.JPanel {
     private void btnNhanSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanSanActionPerformed
 
         try {
+            key = true;
             String id = tbDatSan.getValueAt(index, 0).toString();
             String getND = tbDatSan.getValueAt(index, 6).toString();
             Date ND = format.parse(getND);
-            LichDatSanBong lsd = new LichDatSanBong(ND);
-            JOptionPane.showMessageDialog(this, qlds.nhanSan(id, lsd));
+            LichDatSanBong lsd = new LichDatSanBong();
+            lsd.setNgayDa(ND);
+            lsd.setCaDa(Integer.parseInt(tbDatSan.getValueAt(index, 5).toString()));
+            qlds.nhanSan(id, lsd);
             fillTable(qlds.getList());
         } catch (Exception e) {
             e.printStackTrace();
@@ -979,6 +1048,7 @@ public class FormDatSan extends javax.swing.JPanel {
     private void tbDatSanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDatSanMouseClicked
         // TODO add your handling code here:
         index = tbDatSan.getSelectedRow();
+        key = false;
     }//GEN-LAST:event_tbDatSanMouseClicked
 
     private void lbSan5AMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbSan5AMouseEntered
@@ -988,11 +1058,13 @@ public class FormDatSan extends javax.swing.JPanel {
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
         fillTable(qlds.getList());
+        key = true;
     }//GEN-LAST:event_button1ActionPerformed
 
     private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1003,6 +1075,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton4ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1013,6 +1086,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton7ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1023,6 +1097,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton9ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1033,6 +1108,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1043,6 +1119,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton5ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1053,6 +1130,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton8ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1063,6 +1141,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
@@ -1073,6 +1152,7 @@ public class FormDatSan extends javax.swing.JPanel {
 
     private void myButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton6ActionPerformed
         // TODO add your handling code here:
+        key = false;
         if (txtDate.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Chọn Ngày Tháng");
         } else {
